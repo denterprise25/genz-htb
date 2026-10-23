@@ -1,18 +1,35 @@
-# Rootnotes
+# Gen Z HTB
 
-A private field journal for machine walkthroughs, with online R2 storage and Markdown, text, and PDF attachments.
+An independent public walkthrough collection for Hack The Box machines and TryHackMe rooms. The interface keeps the field-journal design, an interactive machine illustration, platform indexes, filters, and dedicated reading-guide pages.
 
-## Source
+Live site: https://denterprise25.github.io/genz-htb/
 
-- `ui/index.html`: responsive interface, editor, Markdown renderer, and reading room.
-- `ui/fonts/`: embedded open-source fonts with their licenses.
-- `worker/server.js`: existing storage and upload API.
-- `scripts/compose.mjs`: combines the UI, embedded fonts, and server into `worker/index.js`.
+## Build and preview
 
-Run `bash scripts/build.sh` and `node scripts/validate-artifact.mjs` before publishing. The generated `dist/server/index.js` is a standalone Worker; all required frontend assets are embedded. Site identity and bindings are retained in `.openai/hosting.json`.
+Requires Node.js 22 or later. No package installation is needed.
 
-The Site's private access gateway protects the library and API. Draft/Published controls organization within this private journal; it does not change who can visit the Site.
+```sh
+node scripts/build-pages.mjs
+python3 -m http.server 4175 --directory ui
+```
 
-## Public machine collection
+Open http://localhost:4175/. The build creates real static routes for `/machines/`, `/hack-the-box/`, `/tryhackme/`, and `/machines/<slug>/`. Relative base paths support the GitHub Pages project prefix and direct page reloads. Generated HTML directories are ignored by Git; edit `ui/index.html` as the shared template.
 
-The GitHub Pages UI loads `ui/data/machines.json` using a relative path. It contains 12 attributed Medium reading recommendations with original summaries. Imported entries are read-only; full walkthroughs and screenshots are linked at the original source. Linux/Windows tabs, search, difficulty/OS filters and grid/list view work without a backend. Local fonts are loaded from `ui/fonts/fonts.css`.
+## Content
+
+`ui/data/machines.json` contains 18 credited references: 12 HTB machines and 6 TryHackMe rooms. Each record needs a unique ID and explicit platform-prefixed slug, title, platform, OS, difficulty, summary, tags, publication date (`updated`), author, source title/URL, article reading time, and official lab link. Keep unknown difficulty as `Not rated`. Publication dates and reading time describe the referenced article, not the lab's release date or solve duration.
+
+`ui/data/learning-notes.json` contains original `notice` and `reason` reading prompts keyed by the same slugs. Full walkthroughs and screenshots remain on the original authors' Medium pages. When a specific HTB page cannot be confirmed to resolve, its button says `Browse HTB Labs` and opens the official catalog. TryHackMe records link to verified rooms. The Linux Fundamentals guide includes a note about revised room tasks.
+
+This is a static public collection; browser preferences only remember grid/list layout. Publishing new content means updating these JSON files and rebuilding. No upload or authentication backend is included.
+
+## Interface and deployment
+
+- `ui/index.html`: shared page shell and original machine illustration.
+- `ui/pages.css`: platform indexes, reading pages, and mobile navigation.
+- `ui/animations.css`: phase emphasis, machine motion, entrances, hover/focus, and reduced-motion support.
+- `ui/app.js`: navigation, filtering, rendering, section links, and reading progress.
+- `ui/art.js`: decorative SVG illustrations.
+- `scripts/build-pages.mjs`: validates records and generates the routes.
+
+Pushing to `main` runs `.github/workflows/deploy.yml`: it generates the routes and deploys `ui/` to the existing GitHub Pages site. The old `.openai/hosting.json` belongs to a separate Rootnotes project and is not used for this deployment.

@@ -1,0 +1,204 @@
+/* Motion follows the reading path, never the whole archive at once.
+   Load after the main stylesheet.
+   Hooks:
+   - .diagram-panel[data-active-phase="0|1|2"] mirrors the selected phase.
+   - SVG paths: data-phase-route="0|1|2"; label groups: data-phase-label="0|1|2".
+   - Add .motion-ready to <html> only after installing the reveal observer;
+     toggle .is-visible on .reveal sections. Content is visible without JS.
+   - .page-enter runs once when a detail route is rendered.
+   - .machine-hardware can identify the complete SVG hardware group.
+*/
+:root {
+  --motion-ease: cubic-bezier(.2,.7,.2,1);
+  --motion-fast: 180ms;
+  --motion-read: 480ms;
+}
+
+.machine-drawing {
+  animation: drawing-settle 800ms var(--motion-ease) both;
+}
+
+.machine-drawing > .machine-hardware,
+.machine-drawing > g:nth-of-type(2) {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hardware-breathe 7s ease-in-out 800ms infinite;
+}
+
+.path-route {
+  animation: route-travel 18s linear infinite;
+}
+
+.signal {
+  animation: evidence-pulse 3.5s ease-in-out infinite;
+}
+
+/* The selected path stays bright; the surrounding diagram stays readable. */
+.diagram-panel [data-phase-route] {
+  opacity: .25;
+  transition: opacity 350ms ease;
+}
+
+.diagram-panel [data-phase-label] {
+  opacity: .65;
+  transition: opacity 350ms ease, transform 350ms var(--motion-ease);
+}
+
+.diagram-panel[data-active-phase="0"] [data-phase-route="0"],
+.diagram-panel[data-active-phase="1"] [data-phase-route="1"],
+.diagram-panel[data-active-phase="2"] [data-phase-route="2"],
+.diagram-panel[data-active-phase="0"] [data-phase-label="0"],
+.diagram-panel[data-active-phase="1"] [data-phase-label="1"],
+.diagram-panel[data-active-phase="2"] [data-phase-label="2"] {
+  opacity: 1;
+}
+
+.diagram-panel[data-active-phase="0"] [data-phase-label="0"],
+.diagram-panel[data-active-phase="1"] [data-phase-label="1"],
+.diagram-panel[data-active-phase="2"] [data-phase-label="2"] {
+  transform: translateY(-2px);
+}
+
+.diagram-panel [data-phase-label] rect {
+  transition: fill 250ms ease, stroke 250ms ease;
+}
+
+.diagram-panel[data-active-phase="0"] [data-phase-label="0"] rect,
+.diagram-panel[data-active-phase="1"] [data-phase-label="1"] rect,
+.diagram-panel[data-active-phase="2"] [data-phase-label="2"] rect {
+  fill: var(--orange-light);
+  stroke: var(--accent);
+}
+
+.phase-button {
+  transition: color var(--motion-fast), background var(--motion-fast),
+    border-color var(--motion-fast), transform var(--motion-fast);
+}
+
+.phase-button:active {
+  transform: translateY(1px);
+}
+
+.reveal { opacity: 1; }
+
+.motion-ready .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--motion-read) ease,
+    transform var(--motion-read) var(--motion-ease);
+}
+
+.motion-ready .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.page-enter {
+  animation: reading-arrival 420ms var(--motion-ease) both;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 -1px;
+  height: 3px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 250ms var(--motion-ease);
+}
+
+.nav-link.active::after,
+.nav-link[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+.entry-art svg,
+.entry-foot svg {
+  transition: transform 300ms var(--motion-ease);
+}
+
+:where(a, button, input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.search-wrap:focus-within {
+  outline: 1px solid var(--accent);
+  outline-offset: 5px;
+}
+
+/* Hover is deliberate and local, including the arrow showing what opens. */
+@media (hover: hover) and (pointer: fine) {
+  .entry:hover { transform: translateY(-3px); }
+  .entry:hover .entry-art svg {
+    transform: translateY(-4px);
+  }
+  .entry:hover .entry-foot svg {
+    transform: translate(2px,-2px);
+  }
+  .collection.list .entry:hover { transform: none; }
+  .nav-link:hover::after { transform: scaleX(1); }
+  .phase-button:hover { transform: translateY(-2px); }
+  .button:hover svg { transform: translateX(2px); }
+  .button svg { transition: transform 200ms var(--motion-ease); }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .entry:hover,
+  .entry:hover .entry-art svg,
+  .empty:hover .empty-illustration svg,
+  .round-link:hover {
+    transform: none;
+  }
+  .entry:hover { box-shadow: none; }
+}
+
+@keyframes drawing-settle {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes hardware-breathe {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes route-travel {
+  to { stroke-dashoffset: -144; }
+}
+
+@keyframes evidence-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .45; }
+}
+
+@keyframes reading-arrival {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .motion-ready .reveal,
+  .machine-drawing,
+  .page-enter {
+    opacity: 1;
+    transform: none;
+  }
+  .entry:hover,
+  .entry:hover .entry-art svg,
+  .entry:hover .entry-foot svg,
+  .round-link:hover,
+  .empty:hover .empty-illustration svg,
+  .phase-button:hover,
+  .phase-button:active,
+  .button:hover svg,
+  .diagram-panel [data-phase-label] {
+    transform: none !important;
+  }
+}
