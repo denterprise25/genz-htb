@@ -15,13 +15,18 @@ async function build() {
   if (!Array.isArray(records) || records.length === 0) {
     throw new Error('machines.json must contain a nonempty array of machine records.');
   }
-  for (const [name, pattern] of [
-    ['base href="./"', /<base\s+href=["']\.\/["']\s*\/?\s*>/gi],
-    ['body data-page="home"', /<body\b[^>]*\bdata-page=["']home["'][^>]*>/gi],
-    ['title', /<title\b[^>]*>[\s\S]*?<\/title>/gi],
-    ['description', /<meta\b(?=[^>]*\bname=["']description["'])[^>]*>/gi],
+  const heads = [...template.matchAll(/<head\b[^>]*>[\s\S]*?<\/head>/gi)];
+  if (heads.length !== 1) throw new Error('ui/index.html must have exactly one head element.');
+  const head = heads[0][0];
+  // SVG illustrations have their own accessible titles; document metadata
+  // belongs to the HTML head and must be validated independently.
+  for (const [name, pattern, source] of [
+    ['base href="./"', /<base\s+href=["']\.\/["']\s*\/?\s*>/gi, head],
+    ['body data-page="home"', /<body\b[^>]*\bdata-page=["']home["'][^>]*>/gi, template],
+    ['title', /<title\b[^>]*>[\s\S]*?<\/title>/gi, head],
+    ['description', /<meta\b(?=[^>]*\bname=["']description["'])[^>]*>/gi, head],
   ]) {
-    if ([...template.matchAll(pattern)].length !== 1) {
+    if ([...source.matchAll(pattern)].length !== 1) {
       throw new Error(`ui/index.html must have exactly one ${name} element.`);
     }
   }
@@ -87,13 +92,14 @@ async function build() {
 
   for (const page of pages) {
     const bodyAttributes = ` data-page="${page.page}"${page.machine ? ` data-machine="${page.machine}"` : ''}`;
-    const html = template
+    const pageHead = head
       .replace(/<base\s+href=["']\.\/["']\s*\/?\s*>/i, `<base href="${'../'.repeat(page.path.length)}">`)
-      .replace(/<body\b[^>]*>/i, tag => tag.replace(/\s+data-(?:page|machine)=["'][^"']*["']/gi, '')
-        .replace(/>$/, `${bodyAttributes}>`))
       .replace(/<title\b[^>]*>[\s\S]*?<\/title>/i, () => `<title>${escapeHtml(page.title)}</title>`)
       .replace(/<meta\b(?=[^>]*\bname=["']description["'])[^>]*>/i,
         () => `<meta name="description" content="${escapeHtml(page.description)}">`);
+    const html = template.replace(head, () => pageHead)
+      .replace(/<body\b[^>]*>/i, tag => tag.replace(/\s+data-(?:page|machine)=["'][^"']*["']/gi, '')
+        .replace(/>$/, `${bodyAttributes}>`));
     const output = join(uiRoot, ...page.path);
     await mkdir(output, { recursive: true });
     await writeFile(join(output, 'index.html'), html);

@@ -1,0 +1,81 @@
+/* Override --ca-* on #cyber-motion-lab to match the surrounding site. */
+#cyber-motion-lab {
+  --ca-paper: #eeece2;
+  --ca-ink: #343d30;
+  --ca-light: #e0e5d3;
+  --ca-mid: #b8c3a7;
+  --ca-deep: #899d78;
+  --ca-orange: #f15332;
+  --ca-line: #c6c9b9;
+  --ca-speed: 1;
+  color: var(--ca-ink);
+  font-family: var(--cml-sans, inherit);
+  width: 100%;
+  max-width: 1100px;
+  margin: 80px auto;
+  scroll-margin-top: 100px;
+}
+#cyber-motion-lab *, #cyber-motion-lab *::before, #cyber-motion-lab *::after { box-sizing: border-box; }
+#cyber-motion-lab [hidden] { display: none !important; }
+#cyber-motion-lab .cml-intro { max-width: 640px; margin-bottom: 25px; }
+#cyber-motion-lab .cml-kicker,
+#cyber-motion-lab .cml-eyebrow { font: 500 11px/1.5 var(--cml-mono, "Courier New", monospace); letter-spacing: .1em; margin: 0 0 9px; }
+#cyber-motion-lab .cml-intro h2 { font: inherit; font-family: var(--cml-display, inherit); font-size: clamp(28px, 4vw, 44px); font-weight: 600; line-height: 1.1; letter-spacing: -.04em; margin: 0 0 14px; }
+#cyber-motion-lab .cml-intro > p:last-child { font-size: 15px; line-height: 1.65; margin: 0; max-width: 59ch; }
+#cyber-motion-lab button { font: inherit; min-height: 44px; cursor: pointer; border-radius: 0; box-shadow: none; text-transform: none; -webkit-tap-highlight-color: transparent; }
+#cyber-motion-lab button:focus-visible { outline: 3px solid var(--ca-orange); outline-offset: 4px; }
+#cyber-motion-lab .cml-tools { display: flex; gap: 0; width: fit-content; max-width: 100%; border: 1px solid var(--ca-ink); margin-bottom: 20px; }
+#cyber-motion-lab .cml-tools button { border: 0; background: transparent; color: var(--ca-ink); padding: 12px 23px; font-size: 14px; font-weight: 600; line-height: 1.35; }
+#cyber-motion-lab .cml-tools button + button { border-left: 1px solid var(--ca-ink); }
+#cyber-motion-lab .cml-tools button[aria-pressed="true"] { background: var(--ca-ink); color: var(--ca-paper); }
+#cyber-motion-lab .cml-tools button:hover:not([aria-pressed="true"]) { background: var(--ca-light); }
+#cyber-motion-lab .ca-product { position: relative; background-color: var(--ca-paper); background-image: radial-gradient(var(--ca-line) .7px, transparent .7px); background-size: 26px 26px; padding: 32px 40px 26px; border: 1px solid var(--ca-line); overflow: hidden; }
+#cyber-motion-lab .cml-top { position: absolute; z-index: 1; top: 31px; left: 40px; max-width: 320px; }
+#cyber-motion-lab .cml-eyebrow { margin-bottom: 8px; }
+#cyber-motion-lab .cml-top h3 { font: 400 clamp(27px, 4vw, 39px)/1.1 var(--cml-display, Georgia, "Times New Roman", serif); letter-spacing: -.04em; margin: 0 0 9px; }
+#cyber-motion-lab .cml-subtitle { margin: 0; font-size: 13px; line-height: 1.5; }
+#cyber-motion-lab .cml-scene { width: min(100%, 790px); margin: 45px auto 0; aspect-ratio: 660 / 420; }
+#cyber-motion-lab .cml-scene > svg { display: block; width: 100%; height: 100%; overflow: visible; }
+#cyber-motion-lab .cml-readout { display: flex; align-items: center; gap: 10px; min-height: 45px; padding: 11px 0; border-top: 1px solid var(--ca-line); margin-bottom: 12px; font: 11px/1.5 var(--cml-mono, "Courier New", monospace); letter-spacing: .02em; overflow-wrap: anywhere; }
+#cyber-motion-lab .cml-readout > span:first-child { color: var(--ca-orange); font-size: 18px; }
+#cyber-motion-lab .cml-controls { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+#cyber-motion-lab .cml-steps { display: flex; gap: 8px; }
+#cyber-motion-lab .cml-steps button { border: 1px solid var(--ca-line); background: var(--ca-paper); color: var(--ca-ink); padding: 12px 16px; font: 12px/1.3 var(--cml-mono, "Courier New", monospace); }
+#cyber-motion-lab .cml-steps button span { opacity: .65; margin-right: 6px; }
+#cyber-motion-lab .cml-steps button[aria-pressed="true"] { color: var(--ca-paper); background: var(--ca-ink); border-color: var(--ca-ink); }
+#cyber-motion-lab .cml-steps button:hover { border-color: var(--ca-ink); }
+#cyber-motion-lab .cml-play { display: inline-flex; align-items: center; justify-content: center; gap: 9px; border: 1px solid var(--ca-ink); background: transparent; color: var(--ca-ink); padding: 11px 15px; min-width: 94px; font-size: 13px; }
+#cyber-motion-lab .cml-play:hover { background: var(--ca-light); }
+#cyber-motion-lab .cml-play [data-motion-play-icon] { width: 12px; font-size: 11px; text-align: center; }
+#cyber-motion-lab .cml-play[aria-disabled="true"] { cursor: default; font-size: 11px; }
+#cyber-motion-lab .cml-status { display: flex; align-items: baseline; gap: 9px; min-height: 39px; font-size: 14px; line-height: 1.55; margin: 17px 0 0; }
+#cyber-motion-lab .cml-status-dot { display: block; flex: 0 0 6px; height: 6px; border-radius: 50%; background: var(--ca-deep); }
+#cyber-motion-lab .ca-product[data-playing="true"] .cml-status-dot { background: var(--ca-orange); }
+#cyber-motion-lab .cml-note { max-width: 74ch; font-size: 12px; line-height: 1.6; margin: 7px 0 0; opacity: .8; }
+#cyber-motion-lab .cml-reduced-note { font-size: 12px; line-height: 1.5; margin: 12px 0 0; }
+@media (max-width: 760px) {
+  #cyber-motion-lab { margin: 56px auto; }
+  #cyber-motion-lab .ca-product { padding: 25px 24px 22px; }
+  #cyber-motion-lab .cml-top { position: static; max-width: none; }
+  #cyber-motion-lab .cml-scene { margin-top: 7px; }
+  #cyber-motion-lab .cml-controls { flex-wrap: wrap; gap: 12px; }
+  #cyber-motion-lab .cml-steps { flex: 1; }
+  #cyber-motion-lab .cml-steps button { flex: 1; padding: 12px 10px; }
+}
+@media (max-width: 460px) {
+  #cyber-motion-lab .ca-product { padding: 23px 14px 20px; }
+  #cyber-motion-lab .cml-tools { width: 100%; }
+  #cyber-motion-lab .cml-tools button { padding: 12px 11px; font-size: 13px; }
+  #cyber-motion-lab .cml-tools button:first-child { flex: 1.4; }
+  #cyber-motion-lab .cml-tools button:last-child { flex: 1; }
+  #cyber-motion-lab .cml-scene { width: calc(100% + 20px); margin: 8px -10px; }
+  #cyber-motion-lab .cml-steps { flex-basis: 100%; gap: 5px; }
+  #cyber-motion-lab .cml-steps button { padding: 12px 5px; font-size: 10px; white-space: nowrap; }
+  #cyber-motion-lab .cml-steps button span { margin-right: 3px; }
+  #cyber-motion-lab .cml-play { margin-left: auto; }
+  #cyber-motion-lab .cml-status { min-height: 63px; margin-top: 12px; font-size: 13px; }
+  #cyber-motion-lab .cml-note { font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #cyber-motion-lab *, #cyber-motion-lab *::before, #cyber-motion-lab *::after { animation: none !important; transition: none !important; }
+}

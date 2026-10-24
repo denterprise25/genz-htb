@@ -28,6 +28,8 @@ This is a static public collection; browser preferences only remember grid/list 
 - `ui/index.html`: shared page shell and original machine illustration.
 - `ui/pages.css`: platform indexes, reading pages, and mobile navigation.
 - `ui/animations.css`: phase emphasis, machine motion, entrances, hover/focus, and reduced-motion support.
+- `ui/motion-lab.css` and `ui/motion-lab-genz.css`: the home-page Visual lab and its responsive Gen Z HTB layout.
+- `ui/motion-lab.js`: privilege-escalation and Hashcat concept switching, manual stages, and Play/Pause. Animations start paused, suspend offscreen or in a hidden tab, and use manual stages when reduced motion is enabled.
 - `ui/app.js`: navigation, filtering, rendering, section links, and reading progress.
 - `ui/art.js`: decorative SVG illustrations.
 - `scripts/build-pages.mjs`: validates records and generates the routes.
