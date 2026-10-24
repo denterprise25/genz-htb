@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 420" class="ct-john" role="img" aria-labelledby="ct-john-title ct-john-desc">
+  <title id="ct-john-title">John the Ripper: the password hash workshop</title>
+  <desc id="ct-john-desc">Candidate cards enter an isometric hashing machine. Its rotor processes a candidate into a fingerprint tile, then the output is compared with an existing target fingerprint. In the match stage the two patterns agree. This illustrates computing and comparing hashes, not decrypting a hash or attempting a live login.</desc>
+  <style>
+    .ct-john{--j-paper:var(--ct-paper,#eeece2);--j-ink:var(--ct-ink,#343d30);--j-light:var(--ct-light,#e0e5d3);--j-mid:var(--ct-mid,#b8c3a7);--j-deep:var(--ct-deep,#899d78);--j-orange:var(--ct-orange,#f15332);--j-line:var(--ct-line,#c6c9b9);overflow:visible}
+    .ct-john .john-trace{stroke-dasharray:4 9;animation:john-trace-run calc(15s / var(--ct-speed,1)) linear infinite}
+    .ct-john .john-input-state{opacity:1;transition:opacity calc(.5s / var(--ct-speed,1))}
+    .ct-john .john-card-feed{animation:john-candidate-feed calc(4.4s / var(--ct-speed,1)) ease-in-out infinite}
+    .ct-john .john-card-feed-two{animation-delay:calc(-2.2s / var(--ct-speed,1))}
+    .ct-john .john-rotor{transform-box:fill-box;transform-origin:center}
+    .ct-john .john-hash-position{transform:translate(0,0);transition:transform calc(.9s / var(--ct-speed,1)) cubic-bezier(.22,.61,.36,1)}
+    .ct-john .john-hash-state{opacity:.45;transition:opacity calc(.6s / var(--ct-speed,1))}
+    .ct-john .john-press-state{transform:translateY(-8px);transition:transform calc(.6s / var(--ct-speed,1))}
+    .ct-john .john-comparison-line{stroke:var(--j-line);transition:stroke calc(.6s / var(--ct-speed,1))}
+    .ct-john .john-match-face{fill:var(--j-light);transition:fill calc(.6s / var(--ct-speed,1))}
+    .ct-john .john-match-symbol{opacity:0;transition:opacity calc(.5s / var(--ct-speed,1))}
+    .ct-john .john-led{fill:var(--j-mid);transition:fill calc(.4s / var(--ct-speed,1))}
+    .ct-john .john-mismatch-pattern{opacity:1;transition:opacity calc(.5s / var(--ct-speed,1))}
+    .ct-john .john-matched-pattern{opacity:0;transition:opacity calc(.5s / var(--ct-speed,1))}
+    .ct-product[data-step="0"] .ct-john .john-led-input{fill:var(--j-orange)}
+    .ct-product[data-step="1"] .ct-john .john-input-state,.ct-product[data-step="2"] .ct-john .john-input-state{opacity:.35}
+    .ct-product[data-step="1"] .ct-john .john-card-feed,.ct-product[data-step="2"] .ct-john .john-card-feed{animation:none;transform:translate(29px,-10px);opacity:.6}
+    .ct-product[data-step="1"] .ct-john .john-card-feed-two,.ct-product[data-step="2"] .ct-john .john-card-feed-two{opacity:0}
+    .ct-product[data-step="1"] .ct-john .john-rotor{animation:john-rotor-turn calc(6s / var(--ct-speed,1)) linear infinite}
+    .ct-product[data-step="1"] .ct-john .john-press-state{transform:translateY(0)}
+    .ct-product[data-step="1"] .ct-john .john-press-loop{animation:john-press-work calc(2s / var(--ct-speed,1)) ease-in-out infinite}
+    .ct-product[data-step="1"] .ct-john .john-led-hash{fill:var(--j-orange)}
+    .ct-product[data-step="1"] .ct-john .john-hash-state,.ct-product[data-step="2"] .ct-john .john-hash-state{opacity:1}
+    .ct-product[data-step="1"] .ct-john .john-hash-flow{animation:john-output-feed calc(3.2s / var(--ct-speed,1)) ease-in-out infinite}
+    .ct-product[data-step="2"] .ct-john .john-hash-position{transform:translate(38px,-17px)}
+    .ct-product[data-step="2"] .ct-john .john-led-match{fill:var(--j-orange)}
+    .ct-product[data-step="2"] .ct-john .john-match-face{fill:var(--j-orange)}
+    .ct-product[data-step="2"] .ct-john .john-match-symbol{opacity:1}
+    .ct-product[data-step="2"] .ct-john .john-comparison-line{stroke:var(--j-orange)}
+    .ct-product[data-step="2"] .ct-john .john-mismatch-pattern{opacity:0}
+    .ct-product[data-step="2"] .ct-john .john-matched-pattern{opacity:1}
+    .ct-product[data-step="2"] .ct-john .john-match-pulse{animation:john-match-pulse calc(2.8s / var(--ct-speed,1)) ease-out infinite}
+    .ct-product[data-playing="false"] .ct-john *{animation-play-state:paused!important}
+    @keyframes john-trace-run{to{stroke-dashoffset:-130}}
+    @keyframes john-candidate-feed{0%{transform:translate(0,0);opacity:0}12%{opacity:1}74%{opacity:1}100%{transform:translate(101px,-38px);opacity:0}}
+    @keyframes john-rotor-turn{to{transform:rotate(360deg)}}
+    @keyframes john-press-work{0%,100%{transform:translateY(-5px)}45%,65%{transform:translateY(4px)}}
+    @keyframes john-output-feed{0%{transform:translate(-24px,-8px);opacity:0}20%{opacity:1}75%{opacity:1}100%{transform:translate(12px,5px);opacity:0}}
+    @keyframes john-match-pulse{0%{opacity:.8;stroke-width:2}100%{opacity:0;stroke-width:8}}
+    @media(prefers-reduced-motion:reduce){.ct-john *{animation:none!important;transition:none!important}.ct-john .john-card-feed{transform:translate(45px,-17px)}.ct-john .john-card-feed-two{display:none}}
+  </style>
+  <defs>
+    <g id="john-fingerprint" fill="var(--j-ink)" stroke="none">
+      <path d="M0 0h6v6H0Zm9 0h13v6H9Zm16 0h6v15h-6ZM0 9h13v6H0Zm16 0h6v6h-6ZM0 18h6v13H0Zm9 0h6v6H9Zm9 0h13v6H18ZM9 27h13v4H9Zm16 0h6v4h-6Z"/>
+    </g>
+    <g id="john-candidate-card" stroke="var(--j-ink)" stroke-width="1.3" stroke-linejoin="round">
+      <path d="m-25-6 24-14 39 14L14 8Z" fill="var(--j-paper)"/>
+      <path d="M-25-6 14 8v5l-39-14Z" fill="var(--j-mid)"/>
+      <path d="M14 8 38-6v5L14 13Z" fill="var(--j-deep)"/>
+      <path d="m-12-5 14 5m-8-9 14 5m-9-8 14 5" fill="none" stroke="var(--j-orange)" stroke-width="2.5"/>
+      <circle cx="21" cy="-3" r="2" fill="var(--j-ink)" stroke="none"/>
+    </g>
+  </defs>
+  <!-- A drafting grid and fine traces frame the workshop without moving its body. -->
+  <g fill="none" stroke="var(--j-line)" stroke-width="1">
+    <ellipse cx="335" cy="253" rx="270" ry="114" transform="rotate(-6 335 253)"/>
+    <path d="m71 225 248-169 270 108v143L338 395 71 283Z" stroke-dasharray="3 10"/>
+    <path d="M319 56v216m19 123v-79M71 283l248-11 270 35" stroke-dasharray="3 10"/>
+    <path d="M97 122v16m-8-8h16m453 187v16m-8-8h16M536 80v16m-8-8h16"/>
+    <path d="m157 126 25 10m-25-19 25 10m-25-19 25 10m330 258 24-13m-24 22 24-13"/>
+  </g>
+  <path class="john-trace" d="M90 289v36l178 58 139-36 182-72V165" fill="none" stroke="var(--j-orange)" stroke-width="1.3" opacity=".65"/>
+  <g stroke="var(--j-ink)" stroke-width="1.6" stroke-linejoin="round">
+    <!-- Input conveyor; the two rails visibly lead into the left slot. -->
+    <path d="m96 270 157-83 71 25-157 84Z" fill="var(--j-light)"/>
+    <path d="m96 270 71 26v10l-71-26Z" fill="var(--j-mid)"/>
+    <path d="m167 296 157-84v10l-157 84Z" fill="var(--j-deep)"/>
+    <path d="m109 270 146-77m-103 93 146-77" fill="none" stroke="var(--j-deep)" stroke-width="2"/>
+    <g fill="none" stroke="var(--j-deep)" stroke-width="1.2">
+      <path d="m121 267 25 9m-8-18 25 9m-8-18 25 9m-8-18 25 9m-8-18 25 9m-8-18 25 9m-8-18 25 9"/>
+    </g>
+    <path d="M111 282v23l14 5v-22m48 12v23l14-8v-23" fill="var(--j-mid)"/>
+    <g class="john-input-state">
+      <use href="#john-candidate-card" transform="translate(102 250)"/>
+      <use href="#john-candidate-card" transform="translate(102 243)"/>
+      <use href="#john-candidate-card" transform="translate(102 236)"/>
+      <g transform="translate(141 263)"><g class="john-card-feed"><use href="#john-candidate-card"/></g><g class="john-card-feed john-card-feed-two"><use href="#john-candidate-card"/></g></g>
+    </g>
+    <!-- A broad base and open pressing chamber make hashing feel physical. -->
+    <path d="m227 284 116-67 115 42-116 69Z" fill="var(--j-light)"/>
+    <path d="m227 284 115 44v16l-115-44Z" fill="var(--j-mid)"/>
+    <path d="m342 328 116-69v16l-116 69Z" fill="var(--j-deep)"/>
+    <path d="m242 275 100-58 99 36-100 59Z" fill="var(--j-paper)" stroke-width="1"/>
+    <path d="m253 143 76-44 94 34-76 45Z" fill="var(--j-light)"/>
+    <path d="m253 143 94 35v109l-94-35Z" fill="var(--j-mid)"/>
+    <path d="m347 178 76-45v109l-76 45Z" fill="var(--j-deep)"/>
+    <path d="m266 179 66 25v64l-66-24Z" fill="var(--j-ink)"/>
+    <path d="m273 183 59 22v53l-59-22Z" fill="var(--j-deep)"/>
+    <path d="m273 235 25-14 34 13v24Z" fill="var(--j-light)" stroke-width="1"/>
+    <path d="m277 238 55 20v9l-55-20Z" fill="var(--j-mid)" stroke-width="1"/>
+    <path d="m281 174 7 3v53l-7-3Zm36 14 7 3v53l-7-3Z" fill="var(--j-light)" stroke-width="1"/>
+    <g class="john-press-state"><g class="john-press-loop">
+      <path d="m276 206 23-14 34 13-23 14Z" fill="var(--j-light)" stroke-width="1.2"/>
+      <path d="m276 206 34 13v9l-34-13Z" fill="var(--j-mid)" stroke-width="1.2"/>
+      <path d="m310 219 23-14v9l-23 14Z" fill="var(--j-deep)" stroke-width="1.2"/>
+      <path d="m285 215 17 6" stroke="var(--j-orange)" stroke-width="3"/>
+    </g></g>
+    <path d="m258 138 71-41 89 32-71 41Z" fill="var(--j-paper)" stroke-width="1"/>
+    <path d="m274 137 54-31 61 22-54 32Z" fill="var(--j-light)"/>
+    <g fill="none" stroke="var(--j-deep)" stroke-width="2">
+      <path d="m286 136 40 14m-31-20 40 14m-31-20 40 14m-31-20 40 14"/>
+    </g>
+    <!-- Side rotor sits in its own isometric plane; only the rotor turns. -->
+    <g transform="matrix(.75 -.44 0 1 353 190)">
+      <rect x="0" y="0" width="78" height="78" rx="2" fill="var(--j-mid)" stroke-width="1.3"/>
+      <circle cx="39" cy="38" r="30" fill="var(--j-paper)"/>
+      <circle cx="39" cy="38" r="24" fill="var(--j-light)" stroke-width="1"/>
+      <g class="john-rotor" fill="var(--j-deep)" stroke-width="1.1">
+        <path d="M39 12c15 0 24 12 22 21L42 34Zm26 30c-2 15-15 23-24 19l1-19ZM35 64c-15-2-23-15-19-24l19 1ZM13 34C15 19 28 11 37 15l-1 19Z"/>
+        <circle cx="39" cy="38" r="8" fill="var(--j-orange)"/>
+      </g>
+      <circle cx="39" cy="38" r="3" fill="var(--j-ink)" stroke="none"/>
+      <g fill="var(--j-ink)" stroke="none"><circle cx="6" cy="6" r="1.5"/><circle cx="72" cy="6" r="1.5"/><circle cx="6" cy="72" r="1.5"/><circle cx="72" cy="72" r="1.5"/></g>
+    </g>
+    <path d="m262 156 67 25v10l-67-25Z" fill="var(--j-paper)" stroke-width="1"/>
+    <circle class="john-led john-led-input" cx="274" cy="165" r="2.5" stroke="none"/><circle class="john-led john-led-hash" cx="286" cy="169.5" r="2.5" stroke="none"/><circle class="john-led john-led-match" cx="298" cy="174" r="2.5" stroke="none"/>
+    <path d="m308 176 14 5" fill="none" stroke="var(--j-line)" stroke-width="2"/>
+    <!-- Comparison tray: a new output fingerprint slides beside the saved target. -->
+    <path d="m409 291 105-61 89 32-106 63Z" fill="var(--j-light)"/>
+    <path d="m409 291 88 34v13l-88-34Z" fill="var(--j-mid)"/>
+    <path d="m497 325 106-63v13l-106 63Z" fill="var(--j-deep)"/>
+    <path d="m423 289 91-52 73 27-91 54Z" fill="var(--j-paper)" stroke-width="1"/>
+    <path class="john-comparison-line" d="m427 286 41 15 104-60" fill="none" stroke-width="2"/>
+    <path d="m426 304 17 6m9 4 17 6" fill="none" stroke="var(--j-deep)" stroke-width="2"/>
+    <!-- The target fingerprint is fixed in a little upright inspection jig. -->
+    <g transform="translate(518 207)">
+      <path d="m-4 8 47 18v56L-4 64Z" fill="var(--j-deep)"/>
+      <path d="M0 0 47 18v56L0 56Z" fill="var(--j-light)"/>
+      <path d="m47 18 7-4v56l-7 4Z" fill="var(--j-mid)"/>
+      <g transform="matrix(1 .382 0 1 8 12)"><use href="#john-fingerprint"/></g>
+      <path d="m6 6 34 13m-34 31 34 13" fill="none" stroke="var(--j-line)" stroke-width="1"/>
+      <path d="m-5 58 53 20v6L-5 64Z" fill="var(--j-deep)" stroke-width="1.2"/>
+    </g>
+    <g class="john-hash-position"><g class="john-hash-state"><g class="john-hash-flow">
+      <path d="m435 231 47 18v56l-47-18Z" fill="var(--j-paper)"/>
+      <path d="m482 249 6-4v56l-6 4Z" fill="var(--j-mid)"/>
+      <path d="m435 231 6-4 47 18-6 4Z" fill="var(--j-light)" stroke-width="1"/>
+      <g transform="matrix(1 .382 0 1 443 243)">
+        <g class="john-mismatch-pattern" fill="var(--j-ink)" stroke="none"><path d="M0 0h15v6H0Zm18 0h13v6H18ZM0 9h6v13H0Zm9 0h13v6H9Zm16 0h6v13h-6ZM9 18h6v6H9Zm9 0h4v13h-4ZM0 25h15v6H0Zm25 0h6v6h-6Z"/></g>
+        <g class="john-matched-pattern"><use href="#john-fingerprint"/></g>
+      </g>
+      <path d="m441 281 34 13" fill="none" stroke="var(--j-line)" stroke-width="1"/>
+    </g></g></g>
+    <!-- A small equal-sign plate lights only after the comparison agrees. -->
+    <path class="john-match-face" d="m479 342 30-18 40 15-30 18Z"/>
+    <path d="m479 342 40 15v7l-40-15Z" fill="var(--j-mid)"/>
+    <path d="m519 357 30-18v7l-30 18Z" fill="var(--j-deep)"/>
+    <path class="john-match-symbol" d="m499 339 20 7m-26-3 20 7" stroke="var(--j-paper)" stroke-width="3" fill="none"/>
+    <path class="john-match-symbol john-match-pulse" d="m479 342 30-18 40 15-30 18Z" fill="none" stroke="var(--j-orange)"/>
+  </g>
+  <g fill="var(--j-paper)" stroke="var(--j-orange)" stroke-width="1.6"><circle cx="90" cy="289" r="4"/><circle cx="589" cy="165" r="4"/></g>
+</svg>

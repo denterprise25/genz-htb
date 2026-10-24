@@ -1,9 +1,11 @@
 {
-  "name": "sites-worker-esm-starter",
+  "name": "genz-htb",
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "bash scripts/build.sh",
-    "validate": "node scripts/validate-artifact.mjs"
+    "build": "node scripts/build-pages.mjs",
+    "preview": "python3 -m http.server 4175 --bind 127.0.0.1 --directory ui",
+    "test": "node scripts/test-local-site.mjs",
+    "validate": "npm run build && npm test"
   }
 }

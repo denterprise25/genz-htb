@@ -1,0 +1,92 @@
+<svg class="ct-wireshark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 420" role="img" aria-labelledby="ws-art-title ws-art-desc">
+<title id="ws-art-title">Wireshark packet inspection table</title>
+<desc id="ws-art-desc">Copies of captured packets flow into an inspection table. A selected packet is highlighted and its protocol layers separate under a magnifying lens.</desc>
+<style>
+.ct-wireshark .ws-flow{stroke-dasharray:5 14;animation:ct-ws-flow calc(5s / var(--ct-speed,1)) linear infinite}
+.ct-wireshark .ws-incoming{animation:ct-ws-arrive calc(5s / var(--ct-speed,1)) ease-in-out infinite}
+.ct-wireshark .ws-incoming-two{animation-delay:-2.5s}
+.ct-wireshark .ws-lens-float{animation:ct-ws-lens calc(6s / var(--ct-speed,1)) ease-in-out infinite}
+.ct-wireshark .ws-layer-top,.ct-wireshark .ws-layer-mid,.ct-wireshark .ws-layer-low,.ct-wireshark .ws-lens-position{transition:transform .8s cubic-bezier(.2,.7,.25,1)}
+.ct-wireshark .ws-highlight{opacity:.2;transition:opacity .8s}
+.ct-wireshark .ws-details{opacity:.2;transition:opacity .8s}
+.ct-product[data-step="1"] .ct-wireshark .ws-highlight,.ct-product[data-step="2"] .ct-wireshark .ws-highlight{opacity:1}
+.ct-product[data-step="1"] .ct-wireshark .ws-layer-top{transform:translateY(-12px)}
+.ct-product[data-step="2"] .ct-wireshark .ws-layer-top{transform:translateY(-61px)}
+.ct-product[data-step="2"] .ct-wireshark .ws-layer-mid{transform:translateY(-30px)}
+.ct-product[data-step="2"] .ct-wireshark .ws-layer-low{transform:translateY(3px)}
+.ct-product[data-step="2"] .ct-wireshark .ws-lens-position{transform:translate(0,-17px)}
+.ct-product[data-step="2"] .ct-wireshark .ws-details{opacity:1}
+.ct-product[data-playing="false"] .ct-wireshark *{animation-play-state:paused!important}
+@keyframes ct-ws-flow{to{stroke-dashoffset:-76}}
+@keyframes ct-ws-arrive{0%,100%{transform:translate(-10px,-6px)}50%{transform:translate(18px,10px)}}
+@keyframes ct-ws-lens{0%,100%{transform:translateX(-4px)}50%{transform:translateX(5px)}}
+@media(prefers-reduced-motion:reduce){.ct-wireshark *{animation:none!important;transition:none!important}}
+</style>
+<g fill="none" stroke="var(--ct-line)" stroke-width="1">
+<ellipse cx="333" cy="246" rx="274" ry="139" transform="rotate(-8 333 246)"/>
+<path d="m63 224 270-155 265 153-270 155Z" stroke-dasharray="3 9"/>
+<path d="M98 82v18m-9-9h18M559 339v18m-9-9h18M562 92v18m-9-9h18"/>
+<path d="m121 132 28-17m-28 25 28-17m-28 25 28-17m395 202 28-17m-28 25 28-17m-28 25 28-17"/>
+</g>
+<g stroke="var(--ct-ink)" stroke-width="1.6" stroke-linejoin="round" fill="none">
+<path d="m140 265 190-110 224 129-190 110Z" fill="var(--ct-light)"/>
+<path d="m140 265 224 129v15L140 280Z" fill="var(--ct-mid)"/><path d="m364 394 190-110v15L364 409Z" fill="var(--ct-deep)"/>
+<path d="m160 266 170-98 202 116-168 97Z" stroke="var(--ct-deep)" stroke-width="1"/>
+<path d="m169 277 39 22 40-23m-64-8 25 15 28-16m213 18 30-18 25 15m-71 51 28-16 31 18" stroke="var(--ct-deep)"/>
+<path d="m86 193 173 100 57-33" stroke="var(--ct-mid)" stroke-width="27"/>
+<path class="ws-flow" d="m86 193 173 100 57-33" stroke="var(--ct-deep)" stroke-width="1.5"/>
+<g class="ws-incoming">
+<path d="m91 173 33-19 43 25-33 19Z" fill="var(--ct-paper)"/>
+<path d="m91 173 43 25v15l-43-25Z" fill="var(--ct-mid)"/><path d="m134 198 33-19v15l-33 19Z" fill="var(--ct-deep)"/>
+<path d="m105 174 10-6 27 16-10 6Z" stroke="var(--ct-deep)"/>
+</g>
+<g class="ws-incoming ws-incoming-two">
+<path d="m168 218 33-19 43 25-33 19Z" fill="var(--ct-paper)"/>
+<path d="m168 218 43 25v15l-43-25Z" fill="var(--ct-mid)"/><path d="m211 243 33-19v15l-33 19Z" fill="var(--ct-deep)"/>
+<path d="m181 218 27 16m-20-20 27 16" stroke="var(--ct-deep)"/>
+</g>
+<path d="m252 286 83-48 111 64-83 48Z" fill="var(--ct-mid)"/>
+<path d="m252 286 111 64v9l-111-64Z" fill="var(--ct-deep)"/><path d="m363 350 83-48v9l-83 48Z" fill="var(--ct-deep)"/>
+<g stroke="var(--ct-line)" stroke-dasharray="3 6"><path d="M270 166V288M334 130V251M425 183v119M361 220v118"/></g>
+<g class="ws-layer-low">
+<path d="m270 264 64-37 91 52-64 37Z" fill="var(--ct-light)"/>
+<path d="m270 264 91 52v13l-91-52Z" fill="var(--ct-mid)"/><path d="m361 316 64-37v13l-64 37Z" fill="var(--ct-deep)"/>
+<path d="m281 275 27 16m-27-10 44 25" stroke="var(--ct-deep)"/>
+</g>
+<g class="ws-layer-mid">
+<path d="m270 244 64-37 91 52-64 37Z" fill="var(--ct-paper)"/>
+<path d="m270 244 91 52v13l-91-52Z" fill="var(--ct-mid)"/><path d="m361 296 64-37v13l-64 37Z" fill="var(--ct-deep)"/>
+<path d="m283 246 23-13 58 33-23 13Z" fill="var(--ct-light)" stroke="var(--ct-deep)"/>
+<path d="m281 256 40 23" stroke="var(--ct-deep)"/>
+</g>
+<g class="ws-layer-top">
+<path d="m270 224 64-37 91 52-64 37Z" fill="var(--ct-paper)"/>
+<path d="m270 224 91 52v13l-91-52Z" fill="var(--ct-mid)"/><path d="m361 276 64-37v13l-64 37Z" fill="var(--ct-deep)"/>
+<path d="m285 225 48-28 76 44-48 28Z" fill="var(--ct-light)" stroke="var(--ct-deep)"/>
+<path class="ws-highlight" d="m286 225 47-27 74 43-47 27Z" fill="var(--ct-orange)" fill-opacity=".16" stroke="var(--ct-orange)" stroke-width="2"/>
+<path d="m307 220 19-11 23 13-19 11Zm38 22 19-11 23 13-19 11Z" fill="var(--ct-mid)" stroke-width="1"/>
+<path d="m282 237 42 24" stroke="var(--ct-deep)"/>
+</g>
+<g class="ws-lens-position"><g class="ws-lens-float">
+<path d="m396 144 76 44-13 8-76-44Z" fill="var(--ct-deep)"/><path d="m459 196 13-8v11l-13 8-76-44v-11Z" fill="var(--ct-mid)"/>
+<ellipse cx="347" cy="124" rx="72" ry="41" fill="var(--ct-deep)"/>
+<ellipse cx="347" cy="117" rx="72" ry="41" fill="var(--ct-light)"/>
+<ellipse cx="347" cy="117" rx="58" ry="33" fill="var(--ct-paper)" fill-opacity=".65"/>
+<path d="M290 109c10-24 75-39 105-8" stroke="var(--ct-orange)" stroke-width="3"/>
+<path d="m316 112 31-18m-14 29 31-18m-14 29 23-13" stroke="var(--ct-mid)"/>
+<circle cx="283" cy="117" r="2" fill="var(--ct-orange)" stroke="none"/>
+</g></g>
+<g class="ws-details">
+<path d="m469 257 53-31 39 23-53 31Z" fill="var(--ct-light)"/>
+<path d="m469 257 39 23v10l-39-23Z" fill="var(--ct-mid)"/><path d="m508 280 53-31v10l-53 31Z" fill="var(--ct-deep)"/>
+<path d="M484 242v-79l61 35v79Z" fill="var(--ct-mid)"/>
+<path d="m484 163 7-4 61 35-7 4M545 198l7-4v79l-7 4" fill="var(--ct-deep)"/>
+<path d="m492 177 45 26v56l-45-26Z" fill="var(--ct-paper)"/>
+<path d="m500 190 30 17m-30-7 30 17m-30-7 21 12m-21-2 30 17" stroke="var(--ct-deep)" stroke-width="2"/>
+<path d="m498 205 34 20" stroke="var(--ct-orange)" stroke-width="4"/>
+<path d="M425 228 451 243l27-16" stroke="var(--ct-orange)" stroke-dasharray="4 5"/>
+</g>
+<path d="m300 369 26 15m-18-27 26 15" stroke="var(--ct-deep)"/>
+<circle cx="343" cy="389" r="2.5" fill="var(--ct-orange)" stroke="none"/>
+</g>
+</svg>

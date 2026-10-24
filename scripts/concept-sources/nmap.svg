@@ -1,0 +1,173 @@
+<svg class="ct-nmap" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 420" fill="none" role="img" aria-labelledby="np-title np-desc">
+  <title id="np-title">Nmap: the network explorer</title>
+  <desc id="np-desc">A small scanning console sends discovery probes to three network hosts. Returning signals identify responsive hosts, their port panels open for inspection, and the results become a network map.</desc>
+  <style>
+    .ct-nmap .np-edge{stroke:var(--ct-ink);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+    .ct-nmap .np-thin{stroke:var(--ct-deep);stroke-width:1;stroke-linecap:round;stroke-linejoin:round}
+    .ct-nmap :is(.np-discovery,.np-scan,.np-map,.np-connected,.np-host-light,.np-port-door){transition:opacity .55s ease,transform .55s ease,fill .55s ease,stroke .55s ease}
+    .ct-nmap .np-scan{opacity:.12}.ct-nmap .np-map{opacity:0;transform:translateY(12px)}
+    .ct-nmap .np-connected{opacity:.25}.ct-nmap .np-host-light{fill:var(--ct-deep)}
+    .ct-nmap .np-door-open{fill:var(--ct-orange)}
+    .ct-product[data-step="0"] .ct-nmap .np-discovery{opacity:1}
+    .ct-product[data-step="0"] .ct-nmap .np-host-light{fill:var(--ct-orange)}
+    .ct-product[data-step="1"] .ct-nmap .np-discovery{opacity:.25}
+    .ct-product[data-step="1"] .ct-nmap :is(.np-scan,.np-connected){opacity:1}
+    .ct-product[data-step="1"] .ct-nmap .np-port-door,.ct-product[data-step="2"] .ct-nmap .np-port-door{transform:translate(-5px,-8px)}
+    .ct-product[data-step="2"] .ct-nmap .np-discovery{opacity:.15}
+    .ct-product[data-step="2"] .ct-nmap .np-scan{opacity:.3}
+    .ct-product[data-step="2"] .ct-nmap :is(.np-map,.np-connected){opacity:1;transform:translateY(0)}
+    .ct-product[data-step="2"] .ct-nmap .np-host-light{fill:var(--ct-orange)}
+    .ct-nmap .np-beam{transform-origin:317px 174px;animation:np-sweep calc(8s / var(--ct-speed,1)) ease-in-out infinite alternate}
+    .ct-nmap .np-wave{animation:np-wave calc(3s / var(--ct-speed,1)) ease-out infinite}
+    .ct-nmap .np-wave-b{animation-delay:calc(-1s / var(--ct-speed,1))}
+    .ct-nmap .np-wave-c{animation-delay:calc(-2s / var(--ct-speed,1))}
+    .ct-nmap .np-probe{offset-rotate:0deg;animation:np-travel calc(3.6s / var(--ct-speed,1)) linear infinite}
+    .ct-nmap .np-probe-a{offset-path:path('M300 242 L221 196 L160 231')}
+    .ct-nmap .np-probe-b{offset-path:path('M335 230 L370 210 L370 190 L436 152');animation-delay:calc(-1.2s / var(--ct-speed,1))}
+    .ct-nmap .np-probe-c{offset-path:path('M347 268 L414 307 L498 258');animation-delay:calc(-2.4s / var(--ct-speed,1))}
+    .ct-nmap .np-response{animation-direction:reverse;animation-delay:calc(-1.8s / var(--ct-speed,1))}
+    .ct-nmap .np-light-a{animation:np-light calc(3.6s / var(--ct-speed,1)) ease-in-out infinite}
+    .ct-nmap .np-light-b{animation:np-light calc(3.6s / var(--ct-speed,1)) ease-in-out infinite;animation-delay:calc(-1.2s / var(--ct-speed,1))}
+    .ct-nmap .np-light-c{animation:np-light calc(3.6s / var(--ct-speed,1)) ease-in-out infinite;animation-delay:calc(-2.4s / var(--ct-speed,1))}
+    .ct-nmap .np-map-trace{stroke-dasharray:5 7;animation:np-dash calc(4s / var(--ct-speed,1)) linear infinite}
+    .ct-product[data-playing="false"] .ct-nmap *{animation-play-state:paused!important}
+    @keyframes np-sweep{from{transform:rotate(-18deg)}to{transform:rotate(25deg)}}
+    @keyframes np-wave{0%,100%{opacity:.15}40%{opacity:.9}}
+    @keyframes np-travel{0%{offset-distance:0%;opacity:0}12%,88%{opacity:1}100%{offset-distance:100%;opacity:0}}
+    @keyframes np-light{0%,100%{opacity:.4}35%,65%{opacity:1}}
+    @keyframes np-dash{to{stroke-dashoffset:-48}}
+    @media(prefers-reduced-motion:reduce){.ct-nmap *{animation:none!important;transition:none!important}}
+  </style>
+
+  <!-- Quiet survey geometry and a shallow circuit-board base. -->
+  <g stroke="var(--ct-line)" stroke-width="1">
+    <ellipse cx="331" cy="235" rx="272" ry="151" transform="rotate(-9 331 235)"/>
+    <path d="m65 234 265-153 272 157-266 154Z" stroke-dasharray="3 8"/>
+    <path d="M73 127h18m-9-9v18M572 335h18m-9-9v18M506 67h12m-6-6v12"/>
+  </g>
+  <g class="np-edge">
+    <path d="m82 235 250-144 250 144-250 145Z" fill="var(--ct-light)"/>
+    <path d="m82 235 250 145 250-145v10L332 390 82 245Z" fill="var(--ct-mid)"/>
+    <path d="M332 380v10"/>
+    <path d="m97 235 235-135 235 135-235 136Z" stroke="var(--ct-deep)" stroke-width=".8"/>
+  </g>
+  <g class="np-thin" opacity=".7">
+    <path d="m113 237 28 16 27-16m-42-8 27 16 20-12m-34-47 30-17 29 17m297 114 31-18-31-18m-38 58 32-18-26-15m-140 97 26 15 26-15m-66-10 40 23 40-23M278 141l37-21 32 18m-69 11 37-21 16 9"/>
+    <circle cx="113" cy="237" r="2.7" fill="var(--ct-light)"/><circle cx="198" cy="186" r="2.7" fill="var(--ct-light)"/>
+    <circle cx="495" cy="264" r="2.7" fill="var(--ct-light)"/><circle cx="331" cy="137" r="2.7" fill="var(--ct-light)"/>
+  </g>
+
+  <!-- Probe and response lanes remain visible while playback is paused. -->
+  <g stroke="var(--ct-deep)" stroke-width="1.5" stroke-linejoin="round">
+    <path d="M300 242 221 196 160 231M335 230 370 210v-20l66-38M347 268l67 39 84-49"/>
+    <path d="m297 248-76-44-55 32m173-1 38-22v-19l62-36m-86 105 61 35 78-45" stroke-width=".7"/>
+  </g>
+  <g class="np-connected" stroke="var(--ct-orange)" stroke-width="1.7" stroke-dasharray="3 5">
+    <path d="M300 242 221 196 160 231M335 230 370 210v-20l66-38M347 268l67 39 84-49"/>
+  </g>
+  <g class="np-discovery" fill="var(--ct-orange)">
+    <g class="np-probe np-probe-a"><path d="m-5 0 5-3 5 3-5 3Z"/></g>
+    <g class="np-probe np-probe-b"><path d="m-5 0 5-3 5 3-5 3Z"/></g>
+    <g class="np-probe np-probe-c"><path d="m-5 0 5-3 5 3-5 3Z"/></g>
+  </g>
+  <g class="np-scan" fill="var(--ct-ink)" stroke="var(--ct-paper)" stroke-width="1">
+    <g class="np-probe np-probe-a np-response"><circle r="3.5"/></g>
+    <g class="np-probe np-probe-b np-response"><circle r="3.5"/></g>
+    <g class="np-probe np-probe-c np-response"><circle r="3.5"/></g>
+  </g>
+
+  <!-- Host one: a compact server with three separate service doors. -->
+  <g class="np-edge">
+    <path d="m110 157 49-28 49 28-49 29Z" fill="var(--ct-paper)"/>
+    <path d="m110 157 49 29v62l-49-29Z" fill="var(--ct-mid)"/>
+    <path d="m159 186 49-29v62l-49 29Z" fill="var(--ct-deep)"/>
+    <path d="m121 155 37-21 37 21-37 22Z" stroke="var(--ct-deep)" stroke-width=".8"/>
+    <path d="m125 156 26 15m-18-20 26 15m-18-20 26 15" stroke="var(--ct-deep)" stroke-width="1.2"/>
+    <path d="m117 176 33 19m-33-12 33 19m-33-12 33 19" stroke="var(--ct-deep)" stroke-width="1.2"/>
+    <path d="m169 194 8-5v17l-8 5Zm12-7 8-5v17l-8 5Zm12-7 8-5v17l-8 5Z" class="np-door-open"/>
+    <g class="np-port-door" fill="var(--ct-mid)"><path d="m169 194 8-5v17l-8 5Zm12-7 8-5v17l-8 5Zm12-7 8-5v17l-8 5Z"/></g>
+    <path d="m118 219 17 10m-17-6 10 6" stroke="var(--ct-ink)" stroke-width="1"/>
+    <ellipse class="np-host-light np-light-a" cx="145" cy="221" rx="2.3" ry="3.3" stroke="none"/>
+  </g>
+
+  <!-- Host two: a flat router and an aerial, distinct from the server. -->
+  <g class="np-edge">
+    <path d="m396 125 46-27 49 28-46 27Z" fill="var(--ct-paper)"/>
+    <path d="m396 125 49 28v22l-49-28Z" fill="var(--ct-mid)"/>
+    <path d="m445 153 46-27v22l-46 27Z" fill="var(--ct-deep)"/>
+    <path d="M471 127V87m-3 0h6" stroke-width="2.5"/>
+    <path d="m412 126 27-16 22 13-27 16Z" fill="var(--ct-light)"/>
+    <path d="m418 126 21-12m-13 17 21-12" class="np-thin"/>
+    <path d="m452 154 8-5v10l-8 5Zm12-7 8-5v10l-8 5Zm12-7 8-5v10l-8 5Z" class="np-door-open"/>
+    <g class="np-port-door" fill="var(--ct-mid)"><path d="m452 154 8-5v10l-8 5Zm12-7 8-5v10l-8 5Zm12-7 8-5v10l-8 5Z"/></g>
+    <ellipse class="np-host-light np-light-b" cx="406" cy="141" rx="2" ry="2.7" stroke="none"/>
+    <path d="m414 145 20 11" stroke-width=".8"/>
+  </g>
+
+  <!-- Discovery cone originates at a real mounted scanner. -->
+  <g class="np-discovery">
+    <g class="np-beam">
+      <path d="M317 174 233 94q57-44 126-27Z" fill="var(--ct-orange)" opacity=".075"/>
+      <path d="M317 174 233 94M317 174l42-107" stroke="var(--ct-orange)" stroke-width=".8" opacity=".45"/>
+    </g>
+    <g stroke="var(--ct-orange)" stroke-width="1.3" stroke-linecap="round">
+      <path class="np-wave" d="M281 119q29-19 61-6"/>
+      <path class="np-wave np-wave-b" d="M269 104q42-28 88-9"/>
+      <path class="np-wave np-wave-c" d="M258 88q55-35 114-10"/>
+    </g>
+  </g>
+
+  <!-- Low scanner console: solid edges, panel, antenna swivel and dish. -->
+  <g class="np-edge">
+    <path d="m249 249 67-39 70 40-67 39Z" fill="var(--ct-paper)"/>
+    <path d="m249 249 70 40v27l-70-40Z" fill="var(--ct-mid)"/>
+    <path d="m319 289 67-39v27l-67 39Z" fill="var(--ct-deep)"/>
+    <path d="m260 248 54-31 59 34-54 31Z" stroke="var(--ct-deep)" stroke-width=".8"/>
+    <path d="m260 268 41 24m-41-18 41 24" stroke="var(--ct-deep)" stroke-width="1.2"/>
+    <path d="m331 292 37-21v8l-37 21Z" fill="var(--ct-ink)"/>
+    <path d="m338 291 7-4m5-3 7-4" stroke="var(--ct-orange)" stroke-width="2"/>
+    <ellipse cx="308" cy="302" rx="2.5" ry="3.3" fill="var(--ct-orange)" stroke="none"/>
+    <path d="m289 240 26-15 28 16-26 15Z" fill="var(--ct-mid)"/>
+    <path d="m289 240 28 16v7l-28-16Zm28 16 26-15v7l-26 15Z" fill="var(--ct-deep)"/>
+    <path d="m307 236 9-5 9 5-9 5Z" fill="var(--ct-paper)"/>
+    <path d="M311 236v-47l10-6v48l-5 6Z" fill="var(--ct-mid)"/>
+    <path d="m311 189 10-6 7 4-10 6Z" fill="var(--ct-paper)"/>
+    <path d="M318 193v44" stroke-width=".8"/>
+    <path d="M277 150q12 54 43 49 30-5 46-48Z" fill="var(--ct-deep)"/>
+    <ellipse cx="321" cy="151" rx="45" ry="25" transform="rotate(-9 321 151)" fill="var(--ct-light)"/>
+    <ellipse cx="321" cy="151" rx="34" ry="17" transform="rotate(-9 321 151)" stroke="var(--ct-deep)" stroke-width="1"/>
+    <path d="m290 151 29 19 31-26M319 170v-33" stroke="var(--ct-deep)" stroke-width="1.3"/>
+    <path d="M319 170 317 139" stroke-width="2.5"/>
+    <path d="m312 138 5-3 5 3-5 3Z" fill="var(--ct-orange)"/>
+  </g>
+
+  <!-- Host three: workstation screen and keyboard on a small plinth. -->
+  <g class="np-edge">
+    <path d="m455 267 55-32 51 30-55 32Z" fill="var(--ct-paper)"/>
+    <path d="m455 267 51 30v8l-51-29Zm51 30 55-32v8l-55 32Z" fill="var(--ct-mid)"/>
+    <path d="m481 263 28-16 21 12-28 16Z" fill="var(--ct-deep)"/>
+    <path d="m507 257-5-41 8-5 5 41Z" fill="var(--ct-mid)"/>
+    <path d="m470 215 64-37 5 5v58l-64 37-5-5Z" fill="var(--ct-deep)"/>
+    <path d="m475 220 64-37v58l-64 37Z" fill="var(--ct-paper)"/>
+    <path d="m482 223 50-29v39l-50 29Z" fill="var(--ct-ink)"/>
+    <g class="np-scan" stroke="var(--ct-orange)" stroke-width="1.3"><path d="m488 228 9-5m-9 12 26-15m-26 22 20-12m-20 19 31-18"/></g>
+    <ellipse class="np-host-light np-light-c" cx="507" cy="253" rx="2" ry="2.6" stroke="none"/>
+    <path d="m468 271 24-14 25 15-24 14Z" fill="var(--ct-light)"/>
+    <path d="m475 270 17-10m-11 14 17-10m-11 14 17-10" stroke="var(--ct-deep)" stroke-width="1"/>
+  </g>
+
+  <!-- The final readout turns responses into a compact, legible topology. -->
+  <g class="np-map">
+    <g class="np-edge">
+      <path d="m168 292 59-34 72 42-59 34Z" fill="var(--ct-paper)"/>
+      <path d="m168 292 72 42v6l-72-42Zm72 42 59-34v6l-59 34Z" fill="var(--ct-mid)"/>
+      <path d="m177 291 49-28 62 36-49 28Z" fill="var(--ct-light)" stroke="var(--ct-deep)" stroke-width=".8"/>
+    </g>
+    <g stroke="var(--ct-orange)" stroke-width="1.3" stroke-linejoin="round">
+      <path class="np-map-trace" d="m234 297-17-10m17 10 19-11m-19 11 6 16"/>
+      <path d="m227 297 7-4 7 4-7 4Zm-18-10 8-5 8 5-8 5Zm36-1 8-5 8 5-8 5Zm-13 27 8-5 8 5-8 5Z" fill="var(--ct-paper)"/>
+    </g>
+    <path d="m185 294 9 5m-4-9 9 5m-4-9 9 5" stroke="var(--ct-deep)" stroke-width="1"/>
+  </g>
+  <g stroke="var(--ct-deep)" stroke-width="1" opacity=".7"><path d="m125 287 22 13m-22-7 14 8m399-100 20-12m-20 18 13-8"/></g>
+</svg>

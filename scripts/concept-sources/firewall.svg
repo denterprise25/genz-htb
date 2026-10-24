@@ -1,0 +1,144 @@
+<svg class="cm-firewall" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 420" fill="none" role="img" aria-labelledby="fw-title fw-desc">
+  <title id="fw-title">The packet checkpoint</title>
+  <desc id="fw-desc">A security gateway applies its traffic rules. Allowed green packets continue along the circuit while a blocked orange packet is diverted away. The checkpoint is a visual metaphor for filtering network traffic.</desc>
+  <style>
+    .cm-firewall .fw-line{stroke:var(--cm-ink);stroke-width:1.7;stroke-linejoin:round;stroke-linecap:round}
+    .cm-firewall .fw-arrive{animation:fw-arrive calc(4.8s / var(--cm-speed,1)) ease-in-out infinite}
+    .cm-firewall .fw-approved{animation:fw-pass calc(4.8s / var(--cm-speed,1)) ease-in-out infinite}
+    .cm-firewall .fw-inspect{animation:fw-scan calc(4.8s / var(--cm-speed,1)) ease-in-out infinite}
+    .cm-firewall .fw-blocked{animation:fw-reject calc(4.8s / var(--cm-speed,1)) ease-in-out infinite}
+    .cm-firewall .fw-flow{stroke-dasharray:4 10;animation:fw-dash calc(2.5s / var(--cm-speed,1)) linear infinite}
+    .cm-firewall .fw-pulse{animation:fw-pulse calc(2.4s / var(--cm-speed,1)) ease-in-out infinite}
+    .cm-firewall :is(.fw-incoming-state,.fw-scan-state,.fw-clear-state,.fw-reject-state,.fw-target,.fw-burst,.fw-divert){transition:opacity .6s ease,stroke-width .6s ease}
+    .cm-firewall .fw-incoming-state{opacity:1}
+    .cm-firewall .fw-scan-state{opacity:.2}
+    .cm-firewall :is(.fw-clear-state,.fw-reject-state,.fw-target,.fw-burst,.fw-divert){opacity:.25}
+    [data-playing="false"] .cm-firewall *{animation-play-state:paused!important}
+    [data-step="0"] .cm-firewall .fw-incoming-state{opacity:1}
+    [data-step="1"] .cm-firewall .fw-incoming-state{opacity:.35}
+    [data-step="1"] .cm-firewall :is(.fw-scan-state,.fw-target){opacity:1}
+    [data-step="1"] .cm-firewall .fw-inspect{stroke-width:2.3}
+    [data-step="2"] .cm-firewall :is(.fw-clear-state,.fw-reject-state,.fw-burst,.fw-divert){opacity:1}
+    [data-step="2"] .cm-firewall .fw-incoming-state{opacity:.25}
+    [data-step="2"] .cm-firewall .fw-target{opacity:.35}
+    [data-step="2"] .cm-firewall .fw-burst{stroke-width:2.2}
+    @keyframes fw-arrive{0%,100%{transform:translate(-12px,-7px)}45%,65%{transform:translate(18px,10px)}}
+    @keyframes fw-pass{0%,40%{transform:translate(-10px,-6px)}75%,100%{transform:translate(23px,13px)}}
+    @keyframes fw-scan{0%,100%{transform:translateY(-8px)}45%,65%{transform:translateY(8px)}}
+    @keyframes fw-reject{0%,50%,100%{transform:translate(0,0)}60%{transform:translate(-4px,2px)}70%,85%{transform:translate(3px,-2px)}}
+    @keyframes fw-dash{to{stroke-dashoffset:-28}}
+    @keyframes fw-pulse{0%,100%{opacity:.3}50%{opacity:1}}
+    @media(prefers-reduced-motion:reduce){.cm-firewall *{animation:none!important}}
+  </style>
+
+  <g transform="translate(5 -7) scale(.98)">
+  <!-- Ground plane: a routed board, rather than a server tower. -->
+  <g stroke="var(--cm-line)" stroke-width="1">
+    <path d="M60 250 350 83 612 234 322 401Z" stroke-dasharray="3 9"/>
+    <path d="M66 111h18m-9-9v18M568 333h18m-9-9v18"/>
+    <ellipse cx="330" cy="247" rx="256" ry="143" transform="rotate(-12 330 247)"/>
+  </g>
+  <g class="fw-line">
+    <path d="m83 253 241 139 270-156v13L324 405 83 266Z" fill="var(--cm-mid)"/>
+    <path d="m83 253 270-156 241 139-270 156Z" fill="var(--cm-light)"/>
+    <path d="M324 392v13"/>
+    <path d="m105 253 248-143 219 126-248 143Z" stroke="var(--cm-deep)" stroke-width="1"/>
+  </g>
+  <g stroke="var(--cm-deep)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m130 253 43 25 61-35m-85-1 45 26 34-20m-22-66 35-20 47 27m160-23-37 21 50 29 34-20m-3 65 37 21-65 38m-24-23 35-20-40-23m-117 49-39 23 43 25m-58-43-27 15 39 23"/>
+    <path d="m125 245 121-70m177 167 116-67" stroke-dasharray="2 6"/>
+    <circle cx="130" cy="253" r="3" fill="var(--cm-light)"/>
+    <circle cx="206" cy="182" r="3" fill="var(--cm-light)"/>
+    <circle cx="492" cy="261" r="3" fill="var(--cm-light)"/>
+    <circle cx="305" cy="347" r="3" fill="var(--cm-light)"/>
+  </g>
+
+  <!-- The two inspection lanes run through the open arch. -->
+  <path d="m154 190 329 190" stroke="var(--cm-mid)" stroke-width="33"/>
+  <path d="m154 190 329 190" stroke="var(--cm-ink)" stroke-width="1.3" class="fw-flow"/>
+  <path d="m150 199 329 190m-311-211 329 190" stroke="var(--cm-deep)" stroke-width="1"/>
+  <path class="fw-divert" d="m337 295-47 27-40-23" stroke="var(--cm-orange)" stroke-width="1.6" stroke-dasharray="5 5"/>
+
+  <!-- Back edge and internal sidewall of the gateway. -->
+  <g class="fw-line">
+    <path d="m253 130 140-81 25 14-140 81Z" fill="var(--cm-light)"/>
+    <path d="m393 49 25 14v158l-25-14Z" fill="var(--cm-deep)"/>
+    <path d="m280 154 86-50 25 14-86 50Z" fill="var(--cm-mid)"/>
+    <path d="M366 104v95l25 14v-95Z" fill="var(--cm-deep)"/>
+    <path d="m280 249 86-50 25 14-86 50Z" fill="var(--cm-mid)"/>
+  </g>
+
+  <!-- A small shield gives a clear security cue without typography. -->
+  <g stroke="var(--cm-deep)" stroke-width="1.4" stroke-linejoin="round">
+    <path d="m318 158 17-16 17-3v24c0 17-17 34-17 34s-17-1-17-18Z" fill="var(--cm-paper)"/>
+    <path d="m327 170 6 3 12-20" stroke="var(--cm-ink)" stroke-width="2"/>
+  </g>
+  <g class="fw-target fw-line">
+    <path d="m309 208 23-13 23 13-23 13Z" fill="var(--cm-paper)"/>
+    <path d="m309 208 23 13v23l-23-13Z" fill="var(--cm-mid)"/>
+    <path d="m332 221 23-13v23l-23 13Z" fill="var(--cm-deep)"/>
+    <path d="m322 208 10-6 10 6-10 6Z" stroke="var(--cm-orange)" stroke-width="1.3"/>
+  </g>
+  <g class="fw-scan-state">
+  <g class="fw-inspect" stroke="var(--cm-orange)" stroke-width="1.6">
+    <path d="m282 243 82-47"/>
+    <path d="m282 249 82-47" opacity=".25"/>
+    <circle cx="282" cy="243" r="3" fill="var(--cm-orange)" stroke="none"/>
+    <circle cx="364" cy="196" r="3" fill="var(--cm-orange)" stroke="none"/>
+  </g>
+  </g>
+
+  <!-- Front facade is a single continuous arch with an actual opening. -->
+  <g class="fw-line">
+    <path d="M253 130 393 49v158l-27 16V104l-86 50v119l-27 16Z" fill="var(--cm-paper)"/>
+    <path d="m253 289 25 14 27-16-25-14m86-50 25 14 27-16" fill="var(--cm-mid)"/>
+    <path d="m278 303v-16m113-50v-24"/>
+    <path d="m261 137 124-71" stroke="var(--cm-deep)" stroke-width="1"/>
+    <path d="m290 132 63-36" stroke-width="3"/>
+    <path d="m264 231 8-5v26l-8 5Z" fill="var(--cm-ink)"/>
+    <path d="m374 169 10-6m-10 13 10-6m-10 13 10-6m-10 13 10-6" stroke="var(--cm-deep)"/>
+    <path d="m263 168 8-5m-8 12 8-5m-8 12 8-5" stroke="var(--cm-deep)"/>
+  </g>
+  <ellipse cx="268" cy="213" rx="2.2" ry="3.5" fill="var(--cm-orange)" class="fw-pulse"/>
+  <ellipse cx="379" cy="142" rx="2.2" ry="3.5" fill="var(--cm-deep)"/>
+  <ellipse cx="379" cy="153" rx="2.2" ry="3.5" fill="var(--cm-deep)"/>
+
+  <!-- Incoming payload. -->
+  <g class="fw-incoming-state">
+  <g class="fw-arrive fw-line">
+    <path d="m164 191 30-17 30 17-30 17Z" fill="var(--cm-paper)"/>
+    <path d="m164 191 30 17v29l-30-17Z" fill="var(--cm-mid)"/>
+    <path d="m194 208 30-17v29l-30 17Z" fill="var(--cm-deep)"/>
+    <path d="m178 191 16-9 16 9-16 9Z" stroke="var(--cm-deep)" stroke-width="1"/>
+    <path d="m171 208 15 9m-15-4 10 6" stroke="var(--cm-deep)" stroke-width="1"/>
+  </g>
+  </g>
+
+  <!-- Clean packets continue beyond the gate. -->
+  <g class="fw-clear-state">
+  <g class="fw-approved fw-line">
+    <path d="m411 300 23-13 23 13-23 13Z" fill="var(--cm-paper)"/>
+    <path d="m411 300 23 13v23l-23-13Z" fill="var(--cm-mid)"/>
+    <path d="m434 313 23-13v23l-23 13Z" fill="var(--cm-deep)"/>
+    <path d="m425 301 7 2 12-8" stroke-width="1.8"/>
+    <path d="m470 337 15-9 15 9-15 9Z" fill="var(--cm-paper)"/>
+    <path d="m470 337 15 9v15l-15-9Z" fill="var(--cm-mid)"/>
+    <path d="m485 346 15-9v15l-15 9Z" fill="var(--cm-deep)"/>
+  </g>
+  </g>
+
+  <!-- A rejected payload on the side spur. -->
+  <g class="fw-reject-state">
+  <g class="fw-blocked fw-line">
+    <path d="m216 287 25-14 25 14-25 14Z" fill="var(--cm-orange)"/>
+    <path d="m216 287 25 14v25l-25-14Z" fill="var(--cm-paper)"/>
+    <path d="m241 301 25-14v25l-25 14Z" fill="var(--cm-mid)"/>
+    <path d="m233 283 16 9m-16 0 16-9" stroke="var(--cm-paper)" stroke-width="1.6"/>
+    <path class="fw-burst" d="m205 281-9-5m29-14v-10m44 24 9-5m-7 29 10 5m-58 6-8 5" stroke="var(--cm-orange)" stroke-width="1.6"/>
+  </g>
+  </g>
+  <g stroke="var(--cm-ink)" stroke-width="1" opacity=".45">
+    <path d="m112 280 26 15m-26-10 16 9m396-55 27-16m-27 22 18-11"/>
+  </g>
+  </g>
+</svg>

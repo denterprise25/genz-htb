@@ -1,0 +1,184 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 420" class="ca-hashcat" role="img" aria-labelledby="ca-hc-title ca-hc-desc">
+  <title id="ca-hc-title">Hashcat: a parallel password recovery workshop</title>
+  <desc id="ca-hc-desc">Three lanes of candidate password cards feed an exposed graphics card. Two cooling fans and a grid of compute chips illustrate parallel hashing. Computed fingerprints are compared with a saved target hash; a matching pair connects with an orange equal-sign bridge. This depicts offline password recovery by computing and comparing hashes, not decrypting hashes or attempting online logins.</desc>
+  <style>
+    .ca-hashcat{--h-paper:var(--ca-paper,#eeece2);--h-ink:var(--ca-ink,#343d30);--h-light:var(--ca-light,#e0e5d3);--h-mid:var(--ca-mid,#b8c3a7);--h-deep:var(--ca-deep,#899d78);--h-orange:var(--ca-orange,#f15332);--h-line:var(--ca-line,#c6c9b9);overflow:visible}
+    .ca-hashcat .hc-input{opacity:.3;transition:opacity calc(.4s / var(--ca-speed,1))}
+    .ca-hashcat .hc-lane{stroke:var(--h-line);transition:stroke calc(.4s / var(--ca-speed,1))}
+    .ca-hashcat .hc-energy{opacity:0;transition:opacity calc(.4s / var(--ca-speed,1))}
+    .ca-hashcat .hc-chip{fill:var(--h-deep);transition:fill calc(.4s / var(--ca-speed,1))}
+    .ca-hashcat .hc-fan{transform-box:fill-box;transform-origin:center}
+    .ca-hashcat .hc-results{opacity:.38;transition:opacity calc(.4s / var(--ca-speed,1))}
+    .ca-hashcat .hc-dock{transform:translate(-48px,18px);transition:transform calc(.8s / var(--ca-speed,1)) cubic-bezier(.22,.61,.36,1)}
+    .ca-hashcat .hc-match-face{fill:var(--h-paper);transition:fill calc(.5s / var(--ca-speed,1))}
+    .ca-hashcat .hc-bridge{fill:var(--h-mid);transition:fill calc(.5s / var(--ca-speed,1))}
+    .ca-hashcat .hc-match-ring{opacity:0}
+    .ca-hashcat .hc-idle-pattern{opacity:1}
+    .ca-hashcat .hc-match-pattern{opacity:0}
+    .ca-product[data-step="0"] .ca-hashcat .hc-input{opacity:1}
+    .ca-product[data-step="0"] .ca-hashcat .hc-lane{stroke:var(--h-orange)}
+    .ca-product[data-step="0"] .ca-hashcat .hc-card{animation:hc-candidate-feed calc(3.6s / var(--ca-speed,1)) ease-in-out infinite}
+    .ca-product[data-step="0"] .ca-hashcat .hc-card-b{animation-delay:calc(-1.2s / var(--ca-speed,1))}
+    .ca-product[data-step="0"] .ca-hashcat .hc-card-c{animation-delay:calc(-2.4s / var(--ca-speed,1))}
+    .ca-product[data-step="1"] .ca-hashcat .hc-fan{animation:hc-fan-turn calc(2.3s / var(--ca-speed,1)) linear infinite}
+    .ca-product[data-step="1"] .ca-hashcat .hc-fan-two{animation-direction:reverse;animation-duration:calc(2.8s / var(--ca-speed,1))}
+    .ca-product[data-step="1"] .ca-hashcat .hc-energy{opacity:1;stroke-dasharray:8 22;animation:hc-circuit-flow calc(2.2s / var(--ca-speed,1)) linear infinite}
+    .ca-product[data-step="1"] .ca-hashcat .hc-chip{fill:var(--h-orange)}
+    .ca-product[data-step="1"] .ca-hashcat .hc-results,.ca-product[data-step="2"] .ca-hashcat .hc-results{opacity:1}
+    .ca-product[data-step="1"] .ca-hashcat .hc-result-flow{animation:hc-output-feed calc(3s / var(--ca-speed,1)) ease-in-out infinite}
+    .ca-product[data-step="1"] .ca-hashcat .hc-result-two{animation-delay:calc(-1s / var(--ca-speed,1))}
+    .ca-product[data-step="1"] .ca-hashcat .hc-result-three{animation-delay:calc(-2s / var(--ca-speed,1))}
+    .ca-product[data-step="2"] .ca-hashcat .hc-dock{transform:translate(0,0)}
+    .ca-product[data-step="2"] .ca-hashcat .hc-match-face,.ca-product[data-step="2"] .ca-hashcat .hc-bridge{fill:var(--h-orange)}
+    .ca-product[data-step="2"] .ca-hashcat .hc-idle-pattern{opacity:0}
+    .ca-product[data-step="2"] .ca-hashcat .hc-match-pattern{opacity:1}
+    .ca-product[data-step="2"] .ca-hashcat .hc-match-ring{opacity:.8;animation:hc-match-ring calc(2.8s / var(--ca-speed,1)) ease-out infinite}
+    .ca-product[data-playing="false"] .ca-hashcat *{animation-play-state:paused!important}
+    @keyframes hc-candidate-feed{0%{opacity:.2;transform:translate(-14px,7px)}20%,65%{opacity:1}100%{opacity:0;transform:translate(65px,-24px)}}
+    @keyframes hc-fan-turn{to{transform:rotate(360deg)}}
+    @keyframes hc-circuit-flow{to{stroke-dashoffset:-60}}
+    @keyframes hc-output-feed{0%{opacity:.15;transform:translate(-25px,-9px)}20%,70%{opacity:1}100%{opacity:0;transform:translate(28px,10px)}}
+    @keyframes hc-match-ring{0%{opacity:.8;stroke-width:1.6}100%{opacity:0;stroke-width:8}}
+    @media(prefers-reduced-motion:reduce){.ca-hashcat *{animation:none!important;transition:none!important}.ca-hashcat .hc-card{transform:translate(20px,-7px)}}
+  </style>
+  <defs>
+    <g id="hc-password-card" stroke="var(--h-ink)" stroke-width="1.3" stroke-linejoin="round">
+      <path d="m-25-6 20-12 37 13-20 12Z" fill="var(--h-paper)"/>
+      <path d="m-25-6 37 13v5l-37-13Z" fill="var(--h-mid)"/>
+      <path d="m12 7 20-12v5L12 12Z" fill="var(--h-deep)"/>
+      <path d="m-12-4 16 6m-10-11 16 6" stroke="var(--h-orange)" stroke-width="2.2"/>
+      <circle cx="17" cy="-2" r="1.7" fill="var(--h-ink)" stroke="none"/>
+    </g>
+    <g id="hc-hash-pattern" fill="var(--h-ink)" stroke="none">
+      <path d="M0 0h5v5H0Zm8 0h11v5H8Zm14 0h5v11h-5ZM0 8h11v5H0Zm14 0h5v11h-5ZM0 16h5v11H0Zm8 0h3v5H8Zm14-2h5v5h-5ZM8 24h11v3H8Zm6-3h5v6h-5Zm8 1h5v5h-5Z"/>
+    </g>
+    <g id="hc-result-tile" stroke="var(--h-ink)" stroke-width="1.3" stroke-linejoin="round">
+      <path d="m-20-5 20-12 37 13-20 12Z" fill="var(--h-light)"/>
+      <path d="m-20-5 37 13v6l-37-13Z" fill="var(--h-mid)"/>
+      <path d="m17 8 20-12v6L17 14Z" fill="var(--h-deep)"/>
+      <path d="m-8-3 9 3m-5-7 9 3m-2 4 9 3m-5-7 9 3" stroke="var(--h-ink)" stroke-width="2.5"/>
+    </g>
+    <g id="hc-fan-blades" fill="var(--h-deep)" stroke="var(--h-ink)" stroke-width=".9">
+      <path d="M0-7C-6-17-4-29 5-36c14 1 24 8 28 18C20-21 9-17 5-4Z"/>
+      <path d="M0-7C-6-17-4-29 5-36c14 1 24 8 28 18C20-21 9-17 5-4Z" transform="rotate(60)"/>
+      <path d="M0-7C-6-17-4-29 5-36c14 1 24 8 28 18C20-21 9-17 5-4Z" transform="rotate(120)"/>
+      <path d="M0-7C-6-17-4-29 5-36c14 1 24 8 28 18C20-21 9-17 5-4Z" transform="rotate(180)"/>
+      <path d="M0-7C-6-17-4-29 5-36c14 1 24 8 28 18C20-21 9-17 5-4Z" transform="rotate(240)"/>
+      <path d="M0-7C-6-17-4-29 5-36c14 1 24 8 28 18C20-21 9-17 5-4Z" transform="rotate(300)"/>
+      <circle r="10" fill="var(--h-orange)"/><circle r="3" fill="var(--h-ink)" stroke="none"/>
+    </g>
+  </defs>
+  <!-- Drafting marks hold the same quiet, paper-and-circuit visual language. -->
+  <g fill="none" stroke="var(--h-line)" stroke-width="1">
+    <ellipse cx="334" cy="237" rx="278" ry="125" transform="rotate(-5 334 237)"/>
+    <path d="m62 214 246-162 298 103v153L361 395 62 286Z" stroke-dasharray="3 9"/>
+    <path d="M308 52v225l53 118M62 286l246-9 298 31" stroke-dasharray="3 9"/>
+    <path d="M80 118v16m-8-8h16m476-55v16m-8-8h16M586 355v16m-8-8h16"/>
+    <path d="m121 91 27 10m-27-19 27 10m-27-19 27 10m75 271 24 9m-24-18 24 9"/>
+  </g>
+  <!-- Three independent rails carry candidates toward the exposed GPU. -->
+  <g stroke="var(--h-ink)" stroke-width="1.6" stroke-linejoin="round">
+    <g class="hc-input">
+      <path d="m71 221 131-67 78 29-131 67Z" fill="var(--h-light)"/>
+      <path d="m71 221 78 29v8l-78-29Z" fill="var(--h-mid)"/>
+      <path d="m149 250 131-67v8l-131 67Z" fill="var(--h-deep)"/>
+      <g class="hc-lane" fill="none" stroke-width="1.4">
+        <path d="m80 222 124-63m-103 71 124-63m-103 71 124-63" stroke-dasharray="4 5"/>
+      </g>
+      <use href="#hc-password-card" transform="translate(82 206)"/>
+      <use href="#hc-password-card" transform="translate(82 199)"/>
+      <use href="#hc-password-card" transform="translate(82 192)"/>
+      <g transform="translate(127 190)"><g class="hc-card"><use href="#hc-password-card"/></g></g>
+      <g transform="translate(147 208)"><g class="hc-card hc-card-b"><use href="#hc-password-card"/></g></g>
+      <g transform="translate(170 225)"><g class="hc-card hc-card-c"><use href="#hc-password-card"/></g></g>
+    </g>
+    <!-- Cooling fins, a substantial PCB edge, and exposed PCIe fingers. -->
+    <path d="m184 181 92-53 260 93-92 54Z" fill="var(--h-light)"/>
+    <path d="m184 181 260 94v24l-260-94Z" fill="var(--h-deep)"/>
+    <path d="m444 275 92-54v24l-92 54Z" fill="var(--h-mid)"/>
+    <g stroke="var(--h-ink)" stroke-width="1.1" opacity=".7">
+      <path d="m195 190 238 86m-238-81 238 86m-238-81 238 86m-238-81 238 86m14-21 78-45m-78 51 78-45m-78 51 78-45" fill="none"/>
+    </g>
+    <path d="m184 168 92-53 260 93-92 54Z" fill="var(--h-mid)"/>
+    <path d="m184 168 260 94v13l-260-94Z" fill="var(--h-ink)"/>
+    <path d="m444 262 92-54v13l-92 54Z" fill="var(--h-deep)"/>
+    <path d="m277 218 105 38v22l-105-38Z" fill="var(--h-mid)"/>
+    <g stroke="var(--h-paper)" stroke-width="3">
+      <path d="m285 224v15m9-12v15m9-12v15m9-12v15m9-12v15m9-12v15m9-12v15m9-12v15m9-12v15m9-12v15m9-12v15"/>
+    </g>
+    <path d="m332 239 7 3v17l-7-3Z" fill="var(--h-paper)" stroke="none"/>
+    <!-- Everything on the upper board shares one physical isometric plane. -->
+    <g transform="matrix(.92 .33 -.67 .39 276 108)">
+      <rect x="0" y="0" width="280" height="134" rx="4" fill="var(--h-light)"/>
+      <rect x="5" y="5" width="270" height="124" rx="2" fill="none" stroke="var(--h-deep)" stroke-width="1"/>
+      <g fill="none" stroke="var(--h-deep)" stroke-width="1.2">
+        <path d="M6 27h20l10 10h32m-62 67h16l10-10h36M117 27h30v20m-30 60h30V88m119-62h-20l-12 12h-29m61 68h-17l-12-12h-32M126 6v12h30V6m-30 122v-12h30v12"/>
+      </g>
+      <g class="hc-energy" fill="none" stroke="var(--h-orange)" stroke-width="2">
+        <path d="M6 27h20l10 10h32m-62 67h16l10-10h36M117 27h30v20m-30 60h30V88m119-62h-20l-12 12h-29m61 68h-17l-12-12h-32"/>
+      </g>
+      <g class="hc-chip" stroke-width="1.1">
+        <rect x="18" y="9" width="22" height="11"/><rect x="47" y="9" width="22" height="11"/>
+        <rect x="77" y="9" width="22" height="11"/><rect x="173" y="9" width="22" height="11"/>
+        <rect x="202" y="9" width="22" height="11"/><rect x="232" y="9" width="22" height="11"/>
+        <rect x="19" y="113" width="22" height="11"/><rect x="49" y="113" width="22" height="11"/>
+        <rect x="79" y="113" width="22" height="11"/><rect x="174" y="113" width="22" height="11"/>
+        <rect x="204" y="113" width="22" height="11"/><rect x="234" y="113" width="22" height="11"/>
+      </g>
+      <g fill="var(--h-paper)" stroke-width="1.6">
+        <circle cx="73" cy="67" r="45"/><circle cx="207" cy="67" r="45"/>
+      </g>
+      <g fill="none" stroke="var(--h-deep)" stroke-width="1">
+        <circle cx="73" cy="67" r="40"/><circle cx="207" cy="67" r="40"/>
+      </g>
+      <g transform="translate(73 67)"><g class="hc-fan"><use href="#hc-fan-blades"/></g></g>
+      <g transform="translate(207 67)"><g class="hc-fan hc-fan-two"><use href="#hc-fan-blades"/></g></g>
+      <g fill="var(--h-mid)" stroke-width="1">
+        <rect x="126" y="48" width="28" height="36"/><rect x="132" y="54" width="16" height="24" class="hc-chip"/>
+      </g>
+      <g fill="var(--h-ink)" stroke="none">
+        <circle cx="10" cy="10" r="2"/><circle cx="270" cy="10" r="2"/><circle cx="10" cy="124" r="2"/><circle cx="270" cy="124" r="2"/>
+      </g>
+    </g>
+    <!-- Rear cable connectors and their neatly bent power wires. -->
+    <path d="m478 189 23-13 30 11-23 13Z" fill="var(--h-paper)"/>
+    <path d="m478 189 30 11v16l-30-11Z" fill="var(--h-deep)"/>
+    <path d="m508 200 23-13v16l-23 13Z" fill="var(--h-mid)"/>
+    <path d="m511 193 24-15v-25l25-15m-40 57 22-14v-23l22-14" fill="none" stroke-width="3"/>
+    <path d="m550 130 20 7v10l-20-7Z" fill="var(--h-orange)"/>
+    <path d="m193 157-9-4v50l9 4Z" fill="var(--h-paper)"/>
+    <path d="m186 172 3 1m-3 7 3 1m-3 7 3 1" fill="none" stroke-width="2"/>
+    <!-- Small output tiles follow three parallel paths to the comparison dock. -->
+    <g fill="none" stroke="var(--h-line)" stroke-width="1.3">
+      <path d="m338 286 90 33 69-40m-136 16 77 28 69-40m-124 21 65 23 69-40" stroke-dasharray="4 6"/>
+    </g>
+    <g class="hc-results">
+      <g transform="translate(353 288)"><g class="hc-result-flow"><use href="#hc-result-tile"/></g></g>
+      <g transform="translate(387 315)"><g class="hc-result-flow hc-result-two"><use href="#hc-result-tile"/></g></g>
+      <g transform="translate(359 336)"><g class="hc-result-flow hc-result-three"><use href="#hc-result-tile"/></g></g>
+    </g>
+    <path d="m447 328 96-55 62 23-96 56Z" fill="var(--h-light)"/>
+    <path d="m447 328 62 24v12l-62-24Z" fill="var(--h-mid)"/>
+    <path d="m509 352 96-56v12l-96 56Z" fill="var(--h-deep)"/>
+    <!-- Fixed target card: same fingerprint as the eventual matching output. -->
+    <path d="m554 244 42 15v60l-42-15Z" fill="var(--h-light)"/>
+    <path d="m596 259 6-4v60l-6 4Z" fill="var(--h-mid)"/>
+    <g transform="matrix(1 .36 0 1 562 260)"><use href="#hc-hash-pattern"/></g>
+    <path d="m560 250 29 10m-29 44 29 10" fill="none" stroke="var(--h-line)" stroke-width="1"/>
+    <path d="m550 304 49 18v7l-49-18Z" fill="var(--h-deep)"/>
+    <!-- Equal-shaped physical bridge lights only when computed and saved hashes agree. -->
+    <path class="hc-bridge" d="m508 317 40-23 8 3-40 23Zm0 10 40-23 8 3-40 23Z"/>
+    <g class="hc-dock">
+      <path class="hc-match-face" d="m484 275 42 15v60l-42-15Z"/>
+      <path d="m526 290 6-4v60l-6 4Z" fill="var(--h-mid)"/>
+      <path d="m484 275 6-4 42 15-6 4Z" fill="var(--h-light)"/>
+      <g transform="matrix(1 .36 0 1 492 291)">
+        <g class="hc-idle-pattern" fill="var(--h-ink)" stroke="none"><path d="M0 0h11v5H0Zm14 0h5v11h-5Zm8 0h5v5h-5ZM0 8h5v11H0Zm8 0h3v5H8Zm14 0h5v11h-5ZM8 16h11v5H8ZM0 22h11v5H0Zm14 2h13v3H14Z"/></g>
+        <g class="hc-match-pattern"><use href="#hc-hash-pattern"/></g>
+      </g>
+      <path d="m490 281 29 10m-29 44 29 10" fill="none" stroke="var(--h-line)" stroke-width="1"/>
+      <path class="hc-match-ring" d="m484 275 42 15v60l-42-15Z" fill="none" stroke="var(--h-orange)"/>
+    </g>
+  </g>
+  <g fill="var(--h-paper)" stroke="var(--h-orange)" stroke-width="1.6"><circle cx="81" cy="282" r="4"/><circle cx="577" cy="183" r="4"/></g>
+</svg>

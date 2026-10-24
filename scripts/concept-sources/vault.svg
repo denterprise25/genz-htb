@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 420" class="cm-vault" role="img" aria-labelledby="cm-vault-title cm-vault-desc">
+  <title id="cm-vault-title">The encryption vault</title>
+  <desc id="cm-vault-desc">An isometric safe, a separate key token, and orbiting data tiles illustrate protecting, locking, and unlocking information. The locking bars extend while the key dims in the locked stage. The key moves toward the door in the unlock stage. This is a visual metaphor, not an encryption algorithm.</desc>
+  <style>
+    .cm-vault{--v-paper:var(--cm-paper,#eeece2);--v-ink:var(--cm-ink,#343d30);--v-light:var(--cm-light,#e0e5d3);--v-mid:var(--cm-mid,#b8c3a7);--v-deep:var(--cm-deep,#899d78);--v-orange:var(--cm-orange,#f15332);--v-line:var(--cm-line,#c6c9b9);overflow:visible}
+    .cm-vault .vault-wheel-state{transform-box:fill-box;transform-origin:center;transform:rotate(-12deg);transition:transform calc(1s / var(--cm-speed,1)) cubic-bezier(.2,.65,.2,1)}
+    .cm-vault .vault-wheel{transform-box:fill-box;transform-origin:center;animation:vault-wheel-turn calc(12s / var(--cm-speed,1)) ease-in-out infinite}
+    .cm-vault .vault-key-position{opacity:1;transform:translate(0,0);transition:transform calc(1s / var(--cm-speed,1)) cubic-bezier(.2,.65,.2,1),opacity calc(.6s / var(--cm-speed,1))}
+    .cm-vault .vault-key{animation:vault-key-hover calc(5s / var(--cm-speed,1)) ease-in-out infinite}
+    .cm-vault .vault-route{stroke-dasharray:4 9;animation:vault-route-flow calc(18s / var(--cm-speed,1)) linear infinite}
+    .cm-vault .vault-data{offset-path:path('M 92 267 C 109 168 304 155 478 190 C 601 215 577 315 442 347 C 277 385 74 344 92 267');offset-rotate:0deg;animation:vault-data-orbit calc(22s / var(--cm-speed,1)) linear infinite}
+    .cm-vault .vault-data-second{animation-delay:calc(-11s / var(--cm-speed,1))}
+    .cm-vault .vault-bars{transform:translateX(-9px);transition:transform calc(.9s / var(--cm-speed,1)) cubic-bezier(.2,.65,.2,1),fill calc(.6s / var(--cm-speed,1))}
+    .cm-vault .vault-key-connector{opacity:1;transition:opacity calc(.6s / var(--cm-speed,1))}
+    .cm-vault .vault-state-dot{fill:var(--v-mid);transition:fill calc(.8s / var(--cm-speed,1))}
+    .cm-product[data-step="1"] .cm-vault .vault-bars{transform:translateX(14px);fill:var(--v-orange)}
+    .cm-product[data-step="2"] .cm-vault .vault-bars{transform:translateX(-18px)}
+    .cm-product[data-step="1"] .cm-vault .vault-state-dot{fill:var(--v-orange)}
+    .cm-product[data-step="1"] .cm-vault .vault-wheel-state{transform:rotate(45deg)}
+    .cm-product[data-step="1"] .cm-vault .vault-wheel{animation:none;transform:rotate(0deg)}
+    .cm-product[data-step="2"] .cm-vault .vault-wheel-state{transform:rotate(90deg)}
+    .cm-product[data-step="1"] .cm-vault .vault-key-position{opacity:.32}
+    .cm-product[data-step="2"] .cm-vault .vault-key-position{opacity:1;transform:translate(-138px,128px)}
+    .cm-product[data-step="1"] .cm-vault .vault-key-connector{opacity:.3}
+    .cm-product[data-step="2"] .cm-vault .vault-key-connector{opacity:0}
+    .cm-product[data-playing="false"] .cm-vault *{animation-play-state:paused!important}
+    @keyframes vault-wheel-turn{0%,22%,100%{transform:rotate(-6deg)}46%,76%{transform:rotate(6deg)}}
+    @keyframes vault-key-hover{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+    @keyframes vault-route-flow{to{stroke-dashoffset:-130}}
+    @keyframes vault-data-orbit{to{offset-distance:100%}}
+    @media(prefers-reduced-motion:reduce){.cm-vault *{animation:none!important;transition:none!important}.cm-vault .vault-data{offset-distance:12%}.cm-vault .vault-data-second{offset-distance:62%}}
+  </style>
+  <g fill="none" stroke="var(--v-line)" stroke-width="1">
+    <ellipse cx="334" cy="260" rx="244" ry="100" transform="rotate(-7 334 260)"/>
+    <path d="m83 210 242-139 252 90v154L338 397 83 307Z" stroke-dasharray="3 9"/>
+    <path d="M325 71v146m13 180V249M83 307l242-90 252 98" stroke-dasharray="3 9"/>
+    <path d="M100 123v16m-8-8h16m438 210v16m-8-8h16M562 110v16m-8-8h16"/>
+    <path d="m116 167 27 10m-20-21 27 10m-20-21 27 10M514 295l24-12m-24 20 24-12m-24 20 24-12"/>
+  </g>
+  <path class="vault-route" d="M92 267C109 168 304 155 478 190c123 25 99 125-36 157C277 385 74 344 92 267Z" fill="none" stroke="var(--v-orange)" stroke-width="1.2" opacity=".65"/>
+  <g stroke="var(--v-ink)" stroke-width="1.7" stroke-linejoin="round">
+    <!-- A chamfered base gives the safe weight, and a separate edge plane. -->
+    <path d="m195 305 120-70 198 73-121 72Z" fill="var(--v-light)"/>
+    <path d="m195 305 197 75v12l-197-76Z" fill="var(--v-mid)"/>
+    <path d="m392 380 121-72v12l-121 72Z" fill="var(--v-deep)"/>
+    <path d="m205 149 116-68 179 67-115 68Z" fill="var(--v-light)"/>
+    <path d="m205 149 180 67v150l-180-67Z" fill="var(--v-mid)"/>
+    <path d="m385 216 115-68v150l-115 68Z" fill="var(--v-deep)"/>
+    <path d="m215 145 106-63 169 63-106 63Z" fill="var(--v-paper)" stroke-width="1"/>
+    <path d="m225 143 97-57 150 57-97 57Z" fill="var(--v-light)" stroke="var(--v-line)" stroke-width="1"/>
+    <path d="m399 225 87-52v111l-87 52Z" fill="var(--v-mid)" stroke-width="1.3"/>
+    <path d="m410 229 63-37v80l-63 37Z" fill="none" stroke-width="1"/>
+    <path d="m421 236 40-24m-40 34 40-24m-40 34 40-24" fill="none" stroke-width="2"/>
+    <path d="m419 284 9-5v7l-9 5Zm16-10 9-5v7l-9 5Zm16-9 9-5v7l-9 5Z" fill="var(--v-ink)" stroke="none"/>
+    <!-- All door details share the front face's isometric plane. -->
+    <g transform="matrix(1 .372 0 1 205 149)">
+      <path d="M13 12h150v126H13Z" fill="var(--v-deep)"/>
+      <path d="M18 13h140v120H18Z" fill="var(--v-light)"/>
+      <path d="M27 22h122v102H27Z" fill="none" stroke="var(--v-mid)" stroke-width="1"/>
+      <g class="vault-bars" fill="var(--v-ink)" stroke-width="1">
+        <path d="M151 35h17v10h-17Zm0 56h17v10h-17Z"/>
+        <path d="M161 35v10m0 46v10" stroke="var(--v-mid)"/>
+      </g>
+      <path d="M9 34h14v23H9Zm0 56h14v23H9Z" fill="var(--v-deep)"/>
+      <path d="M13 34v23m0 33v23" stroke="var(--v-light)" stroke-width="1"/>
+      <g fill="var(--v-ink)" stroke="none">
+        <circle cx="33" cy="28" r="1.5"/><circle cx="141" cy="28" r="1.5"/>
+        <circle cx="33" cy="117" r="1.5"/><circle cx="141" cy="117" r="1.5"/>
+      </g>
+      <circle cx="91" cy="77" r="42" fill="var(--v-deep)"/>
+      <circle cx="87" cy="72" r="42" fill="var(--v-paper)"/>
+      <circle cx="87" cy="72" r="33" fill="var(--v-mid)" stroke-width="1.3"/>
+      <circle cx="87" cy="72" r="25" fill="var(--v-light)" stroke-width="1"/>
+      <g class="vault-wheel-state"><g class="vault-wheel">
+        <path d="M87 40v64M55 72h64" fill="none" stroke="var(--v-ink)" stroke-width="6" stroke-linecap="round"/>
+        <path d="M87 40v64M55 72h64" fill="none" stroke="var(--v-paper)" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="87" cy="72" r="9" fill="var(--v-orange)"/>
+        <circle cx="87" cy="72" r="3" fill="var(--v-ink)" stroke="none"/>
+      </g></g>
+      <path d="M118 114h24v7h-24Z" fill="var(--v-paper)" stroke-width="1"/>
+      <circle class="vault-state-dot" cx="135" cy="117.5" r="2.2" stroke="none"/>
+    </g>
+    <!-- The key is a physical token, connected by a restrained circuit trace. -->
+    <g class="vault-key-position"><g class="vault-key">
+      <path d="m436 79 47-27 58 21-46 28Z" fill="var(--v-paper)"/>
+      <path d="m436 79 59 22v10l-59-22Z" fill="var(--v-mid)"/>
+      <path d="m495 101 46-28v10l-46 28Z" fill="var(--v-deep)"/>
+      <path d="m449 78 35-20 43 16-34 20Z" fill="var(--v-light)" stroke-width="1"/>
+      <path d="m465 75 12-7 12 4-12 7Z" fill="var(--v-orange)"/>
+      <path d="m481 76 21 8m-7-10-5 5m13-2-5 5" fill="none" stroke-width="3"/>
+      <path d="m443 92 8 3m4 2 8 3m4 1 8 3m4 2 8 3" stroke-width="2"/>
+    </g></g>
+  </g>
+  <path class="vault-key-connector" d="m448 117-31 18v26l-33 19" fill="none" stroke="var(--v-orange)" stroke-width="1.4" stroke-dasharray="5 7"/>
+  <circle cx="384" cy="180" r="4" fill="var(--v-paper)" stroke="var(--v-orange)" stroke-width="1.6"/>
+  <g class="vault-data" stroke="var(--v-ink)" stroke-width="1.2" stroke-linejoin="round">
+    <path d="m-18-4 16-10 21 8L3 4Z" fill="var(--v-paper)"/>
+    <path d="M-18-4 3 4v10l-21-8Z" fill="var(--v-mid)"/>
+    <path d="M3 4 19-6V4L3 14Z" fill="var(--v-deep)"/>
+    <path d="m-8-5 9 3m-4-6 9 3" fill="none" stroke="var(--v-orange)" stroke-width="2"/>
+  </g>
+  <g class="vault-data vault-data-second" stroke="var(--v-ink)" stroke-width="1.2" stroke-linejoin="round">
+    <path d="m-18-4 16-10 21 8L3 4Z" fill="var(--v-light)"/>
+    <path d="M-18-4 3 4v10l-21-8Z" fill="var(--v-mid)"/>
+    <path d="M3 4 19-6V4L3 14Z" fill="var(--v-deep)"/>
+    <circle cx="0" cy="-4" r="3" fill="var(--v-orange)" stroke="none"/>
+  </g>
+</svg>

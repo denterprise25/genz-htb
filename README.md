@@ -9,17 +9,24 @@ Live site: https://denterprise25.github.io/genz-htb/
 Requires Node.js 22 or later. No package installation is needed.
 
 ```sh
-node scripts/build-pages.mjs
-python3 -m http.server 4175 --directory ui
+npm run build
+npm test
+npm run preview
 ```
 
 Open http://localhost:4175/. The build creates real static routes for `/machines/`, `/hack-the-box/`, `/tryhackme/`, and `/machines/<slug>/`. Relative base paths support the GitHub Pages project prefix and direct page reloads. Generated HTML directories are ignored by Git; edit `ui/index.html` as the shared template.
+
+After building, you can also open `ui/index.html` directly from Finder. The committed `ui/data/site-data.js` bundle supplies the content without a local web server or a cross-origin JSON request. `ui/site-runtime.js` resolves local directory links to `index.html`, including nested machine routes and query filters; hosted links keep their clean URLs. Rebuild after editing JSON or the shared template so the bundle and generated pages stay current. The preview server remains useful for checking the same HTTP behaviour as the deployed site.
+
+`npm test` checks local data consistency, file navigation, nested route assets and metadata, and build behaviour with unsafe content or invalid input. `npm run validate` runs the build and these checks together.
 
 ## Content
 
 `ui/data/machines.json` contains 18 credited references: 12 HTB machines and 6 TryHackMe rooms. Each record needs a unique ID and explicit platform-prefixed slug, title, platform, OS, difficulty, summary, tags, publication date (`updated`), author, source title/URL, article reading time, and official lab link. Keep unknown difficulty as `Not rated`. Publication dates and reading time describe the referenced article, not the lab's release date or solve duration.
 
 `ui/data/learning-notes.json` contains original `notice` and `reason` reading prompts keyed by the same slugs. Full walkthroughs and screenshots remain on the original authors' Medium pages. When a specific HTB page cannot be confirmed to resolve, its button says `Browse HTB Labs` and opens the official catalog. TryHackMe records link to verified rooms. The Linux Fundamentals guide includes a note about revised room tasks.
+
+`ui/data/visual-contexts.json` places concept animations beside the relevant learning topic on each machine page. Each slug maps to an ordered array of `{ concept, topic, title, context, why, relation }`. Supported concepts are `nmap`, `john`, `wireshark`, `firewall` (Packet checkpoint), `vault` (Cipher vault), `privesc`, and `hashcat`. Set `topic` to one of the machine's existing tags. Use `relation: "guide"` only when the article's topic supports it; `"background"` marks an additional explanation rather than a tool attributed to the author. Empty arrays are valid when there is no accurate fit. The build rejects unknown slugs or topics, duplicate concepts, incomplete text, and invalid relations.
 
 This is a static public collection; browser preferences only remember grid/list layout. Publishing new content means updating these JSON files and rebuilding. No upload or authentication backend is included.
 
@@ -28,10 +35,15 @@ This is a static public collection; browser preferences only remember grid/list 
 - `ui/index.html`: shared page shell and original machine illustration.
 - `ui/pages.css`: platform indexes, reading pages, and mobile navigation.
 - `ui/animations.css`: phase emphasis, machine motion, entrances, hover/focus, and reduced-motion support.
-- `ui/motion-lab.css` and `ui/motion-lab-genz.css`: the home-page Visual lab and its responsive Gen Z HTB layout.
-- `ui/motion-lab.js`: privilege-escalation and Hashcat concept switching, manual stages, and Play/Pause. Animations start paused, suspend offscreen or in a hidden tab, and use manual stages when reduced motion is enabled.
+- `ui/concept-animations.css` and `ui/concept-animations.js`: reusable animations for all seven concepts. Each instance has three manual stages and Play/Pause, starts paused, suspends offscreen, inside closed details, or in a hidden tab, and uses manual stages when reduced motion is enabled. SVG IDs, classes, and keyframes are isolated so multiple illustrations can share a page.
+- `ui/concept-assets.js`: generated classic-script SVG templates, so illustrations work without runtime network requests.
+- `scripts/concept-sources/`: editable SVG artwork; regenerate the asset bundle with `node scripts/build-concept-assets.mjs`.
+- `ui/learning-visuals.js`: the home-page concept picker and relevant animations beside machine learning topics.
 - `ui/app.js`: navigation, filtering, rendering, section links, and reading progress.
+- `ui/site-runtime.js`: direct-file link normalization and explicit support for links rendered later.
+- `ui/data/site-data.js`: generated classic-script data bundle for both local and hosted browsing; never edit it by hand.
 - `ui/art.js`: decorative SVG illustrations.
-- `scripts/build-pages.mjs`: validates records and generates the routes.
+- `scripts/build-pages.mjs`: validates the machine records, notes, and animation contexts, then generates the data bundle and routes.
+- `scripts/test-local-site.mjs`: regression checks for direct-file browsing, metadata, and safe builds.
 
 Pushing to `main` runs `.github/workflows/deploy.yml`: it generates the routes and deploys `ui/` to the existing GitHub Pages site. The old `.openai/hosting.json` belongs to a separate Rootnotes project and is not used for this deployment.
