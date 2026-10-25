@@ -65,6 +65,7 @@ const pages = [
   ['hack-the-box/index.html', 'htb', '../'],
   ['starting-point/index.html', 'starting', '../'],
   ['medium-htb/index.html', 'medium', '../'],
+  ['hard-htb/index.html', 'hard', '../'],
   ['tryhackme/index.html', 'thm', '../'],
   ...machines.map(machine => [`machines/${machine.slug}/index.html`, 'detail', '../../', machine]),
 ];
@@ -156,7 +157,7 @@ try {
     machines: [], learningNotes: {}, visualContexts: {},
   });
   assert.deepEqual(await readdir(join(fixture, 'ui/machines')), ['index.html'], 'Empty builds must remove stale detail pages.');
-  await Promise.all(['machines', 'hack-the-box', 'starting-point', 'medium-htb', 'tryhackme'].map(route => access(join(fixture, 'ui', route, 'index.html'))));
+  await Promise.all(['machines', 'hack-the-box', 'starting-point', 'medium-htb', 'hard-htb', 'tryhackme'].map(route => access(join(fixture, 'ui', route, 'index.html'))));
 } finally {
   await rm(fixture, { recursive: true, force: true });
 }

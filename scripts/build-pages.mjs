@@ -108,6 +108,8 @@ async function build() {
       description: 'Learn through all 25 Hack The Box Starting Point machines across Tiers 0, 1, and 2 with beginner walkthroughs, commands, access labels, and visual explanations.' },
     { path: ['medium-htb'], page: 'medium', title: 'Medium Hack The Box machines — Gen Z HTB',
       description: 'Explore Medium Hack The Box machines, including credited guides for retired labs and spoiler-free listings for active labs.' },
+    { path: ['hard-htb'], page: 'hard', title: 'Hard Hack The Box machines — Gen Z HTB',
+      description: 'Explore Hard Hack The Box machines, including credited guides for retired labs and spoiler-free listings for active labs.' },
     { path: ['tryhackme'], page: 'thm', title: 'TryHackMe room walkthroughs — Gen Z HTB',
       description: 'Explore TryHackMe room walkthroughs with clear learning goals, difficulty details, and credited guides.' },
   ];
@@ -180,7 +182,7 @@ async function build() {
 
   // Validate all input before replacing generated directories. Reject symlinks
   // rather than following an unexpected route directory outside the project.
-  const routes = ['machines', 'hack-the-box', 'starting-point', 'medium-htb', 'tryhackme'];
+  const routes = ['machines', 'hack-the-box', 'starting-point', 'medium-htb', 'hard-htb', 'tryhackme'];
   for (const route of routes) {
     const target = join(uiRoot, route);
     const stat = await lstat(target).catch(error => {
