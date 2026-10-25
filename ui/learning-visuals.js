@@ -33,7 +33,7 @@
       window.GenzConcepts.unmount(stage);
       stage.innerHTML = window.GenzConcepts.render(key, {id:'library-' + key});
       const related = records.filter(record => contextRows(record.slug).some(row => row.concept === key)).slice(0,4);
-      reading.innerHTML = `<div class="concept-explanation"><span class="mono accent">WHY IT WORKS</span><p>${escape(concepts[key].why)}</p></div><p class="concept-next">${escape(concepts[key].next)}</p>` + (related.length ? `<nav class="concept-guide-links" aria-label="Read about ${escape(concepts[key].title)} in a guide">${related.map(record => {const index=contextRows(record.slug).findIndex(row=>row.concept===key); return `<a href="${escape(href('./machines/'+record.slug+'/#'+anchorFor(key,index)))}"><span>${escape(record.title)}</span><span>${record.platform==='Hack The Box'?'HTB':'THM'} ↗</span></a>`;}).join('')}</nav>` : '');
+      reading.innerHTML = `<div class="concept-explanation"><span class="mono accent">WHY IT WORKS</span><p>${escape(concepts[key].why)}</p></div><p class="concept-next">${escape(concepts[key].next)}</p>` + (related.length ? `<nav class="concept-guide-links" aria-label="Read about ${escape(concepts[key].title)} in a guide">${related.map(record => {const index=contextRows(record.slug).findIndex(row=>row.concept===key); const step=record.guide?.steps?.find(step=>step.animation===key); return `<a href="${escape(href('./machines/'+record.slug+'/#'+(step?'step-'+step.id:anchorFor(key,index))))}"><span>${escape(record.title)}</span><span>${record.platform==='Hack The Box'?'HTB':'THM'} ↗</span></a>`;}).join('')}</nav>` : '');
       window.GenzConcepts.mount(stage);
       window.GenzSite?.fixLinks(reading);
       if (updateAddress) {

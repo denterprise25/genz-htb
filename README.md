@@ -22,7 +22,7 @@ After building, you can also open `ui/index.html` directly from Finder. The comm
 
 ## Content
 
-`ui/data/machines.json` is currently empty (`[]`). All previously published machine and room writeups have been removed. Rebuilding deletes their generated detail pages and publishes empty collection indexes. The independent concept animations remain available in Visual lab.
+`ui/data/machines.json` currently contains 23 Hack The Box beginner learning routes: free and premium-documented Starting Point labs plus retired machines included with VIP+ or PRO. Each route is an independently written, on-page field guide with access labels, source credits, safe reconnaissance examples, reading progress, and relevant visual explanations. Current lab availability can change; confirm the access badge in your own HTB account.
 
 For future records, use a unique ID and platform-prefixed slug, title, platform, OS, difficulty, summary, tags, publication date (`updated`), author, source title/URL, reading time, and official lab link. Keep unknown difficulty as `Not rated`.
 
