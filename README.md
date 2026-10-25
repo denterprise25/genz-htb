@@ -14,7 +14,7 @@ npm test
 npm run preview
 ```
 
-Open http://localhost:4175/. The build creates real static routes for `/machines/`, `/hack-the-box/`, `/tryhackme/`, and `/machines/<slug>/`. Relative base paths support the GitHub Pages project prefix and direct page reloads. Generated HTML directories are ignored by Git; edit `ui/index.html` as the shared template.
+Open http://localhost:4175/. The build creates real static routes for `/machines/`, `/hack-the-box/`, `/medium-htb/`, `/tryhackme/`, and `/machines/<slug>/`. Relative base paths support the GitHub Pages project prefix and direct page reloads. Generated HTML directories are ignored by Git; edit `ui/index.html` as the shared template.
 
 After building, you can also open `ui/index.html` directly from Finder. The committed `ui/data/site-data.js` bundle supplies the content without a local web server or a cross-origin JSON request. `ui/site-runtime.js` resolves local directory links to `index.html`, including nested machine routes and query filters; hosted links keep their clean URLs. Rebuild after editing JSON or the shared template so the bundle and generated pages stay current. The preview server remains useful for checking the same HTTP behaviour as the deployed site.
 
@@ -22,7 +22,7 @@ After building, you can also open `ui/index.html` directly from Finder. The comm
 
 ## Content
 
-`ui/data/machines.json` currently contains 23 Hack The Box beginner learning routes: free and premium-documented Starting Point labs plus retired machines included with VIP+ or PRO. Each route is an independently written, on-page field guide with access labels, source credits, safe reconnaissance examples, reading progress, and relevant visual explanations. Current lab availability can change; confirm the access badge in your own HTB account.
+`ui/data/machines.json` currently contains 45 Hack The Box entries: beginner learning routes, 15 retired Medium field guides, and seven spoiler-free active Medium listings. Retired routes are independently written, on-page field guides with access labels, source credits, safe reconnaissance examples, reading progress, and relevant visual explanations. Active listings intentionally seal their walkthrough until retirement to comply with HTB publishing rules. Current lab availability can change; confirm the access badge in your own HTB account.
 
 For future records, use a unique ID and platform-prefixed slug, title, platform, OS, difficulty, summary, tags, publication date (`updated`), author, source title/URL, reading time, and official lab link. Keep unknown difficulty as `Not rated`.
 

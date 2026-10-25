@@ -16,13 +16,13 @@ function validateGuide(guide, label) {
   if (guide?.generated === true) {
     text(guide.access, 'access');
     text(guide.track, 'track');
-    if (!['free-documented', 'premium-documented', 'vip-included'].includes(guide.access)) fail('invalid access category');
+    if (!['free-documented', 'premium-documented', 'vip-included', 'active-free'].includes(guide.access)) fail('invalid access category');
     return;
   }
   const strings = (value, name) => { if (!Array.isArray(value) || !value.length) fail(`${name} must be a nonempty array`); value.forEach(item => text(item, name)); };
   if (!isObject(guide)) fail('must be an object');
   for (const key of ['overview', 'track', 'access']) text(guide[key], key);
-  if (!['free-documented', 'premium-documented', 'vip-included'].includes(guide.access)) fail('invalid access category');
+  if (!['free-documented', 'premium-documented', 'vip-included', 'active-free'].includes(guide.access)) fail('invalid access category');
   for (const key of ['prerequisites', 'learningObjectives', 'takeaways']) strings(guide[key], key);
   if (!Array.isArray(guide.references) || !guide.references.length) fail('requires credited references');
   const refs = new Set();
@@ -104,6 +104,8 @@ async function build() {
       description: 'Browse Hack The Box machines and TryHackMe rooms by platform, operating system, difficulty, and technique.' },
     { path: ['hack-the-box'], page: 'htb', title: 'Hack The Box walkthroughs — Gen Z HTB',
       description: 'Explore Hack The Box machine walkthroughs, from enumeration and initial access to privilege escalation and the reasoning behind each step.' },
+    { path: ['medium-htb'], page: 'medium', title: 'Medium Hack The Box machines — Gen Z HTB',
+      description: 'Explore Medium Hack The Box machines, including credited guides for retired labs and spoiler-free listings for active labs.' },
     { path: ['tryhackme'], page: 'thm', title: 'TryHackMe room walkthroughs — Gen Z HTB',
       description: 'Explore TryHackMe room walkthroughs with clear learning goals, difficulty details, and credited guides.' },
   ];
@@ -138,7 +140,9 @@ async function build() {
     }
     if (record.guide) validateGuide(record.guide, label);
     pages.push({ path: ['machines', slug], page: 'detail', machine: slug,
-      title: `${record.title} · ${record.platform} walkthrough — Gen Z HTB`,
+      title: record.publication === 'active-locked'
+        ? `${record.title} · active ${record.platform} machine — Gen Z HTB`
+        : `${record.title} · ${record.platform} walkthrough — Gen Z HTB`,
       description: record.summary });
   });
 
@@ -174,7 +178,7 @@ async function build() {
 
   // Validate all input before replacing generated directories. Reject symlinks
   // rather than following an unexpected route directory outside the project.
-  const routes = ['machines', 'hack-the-box', 'tryhackme'];
+  const routes = ['machines', 'hack-the-box', 'medium-htb', 'tryhackme'];
   for (const route of routes) {
     const target = join(uiRoot, route);
     const stat = await lstat(target).catch(error => {
