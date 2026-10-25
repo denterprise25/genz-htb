@@ -83,9 +83,9 @@ for (const [path, page, baseHref, machine] of pages) {
     assert(head.includes(machine.title.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')));
   }
   const scriptSources = [...html.matchAll(/<script\b[^>]*\bsrc=["']([^"']+)["']/gi)].map(match => match[1]);
-  const bundleIndex = scriptSources.indexOf('./data/site-data.js');
+  const bundleIndex = scriptSources.findIndex(source => source.startsWith('./data/site-data.js'));
   const runtimeIndex = scriptSources.indexOf('./site-runtime.js');
-  const appIndex = scriptSources.indexOf('./app.js');
+  const appIndex = scriptSources.findIndex(source => source.startsWith('./app.js'));
   assert(bundleIndex >= 0 && runtimeIndex >= 0 && bundleIndex < appIndex && runtimeIndex < appIndex,
     `${path} must load the local bundle and runtime before app.js.`);
   const resolvedBase = new URL(baseHref, pathToFileURL(join(ui, path)));
