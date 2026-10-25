@@ -29,8 +29,8 @@ async function build() {
   const records = await readData('machines.json');
   const learningNotes = await readData('learning-notes.json');
   const visualContexts = await readData('visual-contexts.json', true);
-  if (!Array.isArray(records) || records.length === 0) {
-    throw new Error('machines.json must contain a nonempty array of machine records.');
+  if (!Array.isArray(records)) {
+    throw new Error('machines.json must contain an array of machine records (an empty array is allowed).');
   }
   const heads = [...template.matchAll(/<head\b[^>]*>[\s\S]*?<\/head>/gi)];
   if (heads.length !== 1) throw new Error('ui/index.html must have exactly one head element.');

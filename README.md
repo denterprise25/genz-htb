@@ -22,9 +22,11 @@ After building, you can also open `ui/index.html` directly from Finder. The comm
 
 ## Content
 
-`ui/data/machines.json` contains 18 credited references: 12 HTB machines and 6 TryHackMe rooms. Each record needs a unique ID and explicit platform-prefixed slug, title, platform, OS, difficulty, summary, tags, publication date (`updated`), author, source title/URL, article reading time, and official lab link. Keep unknown difficulty as `Not rated`. Publication dates and reading time describe the referenced article, not the lab's release date or solve duration.
+`ui/data/machines.json` is currently empty (`[]`). All previously published machine and room writeups have been removed. Rebuilding deletes their generated detail pages and publishes empty collection indexes. The independent concept animations remain available in Visual lab.
 
-`ui/data/learning-notes.json` contains original `notice` and `reason` reading prompts keyed by the same slugs. Full walkthroughs and screenshots remain on the original authors' Medium pages. When a specific HTB page cannot be confirmed to resolve, its button says `Browse HTB Labs` and opens the official catalog. TryHackMe records link to verified rooms. The Linux Fundamentals guide includes a note about revised room tasks.
+For future records, use a unique ID and platform-prefixed slug, title, platform, OS, difficulty, summary, tags, publication date (`updated`), author, source title/URL, reading time, and official lab link. Keep unknown difficulty as `Not rated`.
+
+`ui/data/learning-notes.json` and `ui/data/visual-contexts.json` are currently empty objects. Notes must refer to a current machine slug; the build rejects orphan content.
 
 `ui/data/visual-contexts.json` places concept animations beside the relevant learning topic on each machine page. Each slug maps to an ordered array of `{ concept, topic, title, context, why, relation }`. Supported concepts are `nmap`, `john`, `wireshark`, `firewall` (Packet checkpoint), `vault` (Cipher vault), `privesc`, and `hashcat`. Set `topic` to one of the machine's existing tags. Use `relation: "guide"` only when the article's topic supports it; `"background"` marks an additional explanation rather than a tool attributed to the author. Empty arrays are valid when there is no accurate fit. The build rejects unknown slugs or topics, duplicate concepts, incomplete text, and invalid relations.
 
